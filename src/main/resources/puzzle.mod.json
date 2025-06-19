@@ -1,0 +1,50 @@
+{
+  "formatVersion": 2,
+  "name": "Cosmic API",
+  "id": "cosmic-api",
+  "version": "${version}",
+  "description": "${mod_desc}.",
+  "authors": [ "Mr_Zombii", "CrabKing", "replet" ],
+  "meta": {
+    "icon": "cosmic-api:icons/icon.png"
+  },
+  "entrypoints": {
+    "postInit": [
+      "io.github.puzzle.cosmic.CosmicServerAPI"
+    ],
+    "client_postInit": [
+      "io.github.puzzle.cosmic.CosmicClientAPI"
+    ],
+    "client_init": [
+      "io.github.puzzle.cosmic.CosmicClientAPI"
+    ]
+  },
+  "depends": {
+
+    "puzzle-loader": ">=2.0.0"
+  },
+  "allowedSides": {
+    "client": true,
+    "server": true
+  },
+  "mixins": [
+    "puzzle_cosmic_api.mixins.json"
+  ],
+  "custom": {
+    "loom:injected_interfaces": {
+      "finalforeach/cosmicreach/entities/Entity": ["io/github/puzzle/cosmic/api/entity/IEntity"],
+      "finalforeach/cosmicreach/entities/player/Player": ["io/github/puzzle/cosmic/api/entity/player/IPlayer"],
+      "finalforeach/cosmicreach/entities/player/PlayerEntity": ["io/github/puzzle/cosmic/api/entity/player/IPlayerEntity"],
+      "finalforeach/cosmicreach/blockentities/BlockEntity": ["io/github/puzzle/cosmic/api/block/IBlockEntity"],
+      "finalforeach/cosmicreach/blocks/BlockPosition": ["io/github/puzzle/cosmic/api/block/IBlockPosition"],
+      "finalforeach/cosmicreach/items/Item": ["io/github/puzzle/cosmic/api/item/IItem"],
+      "finalforeach/cosmicreach/items/ItemStack": ["io/github/puzzle/cosmic/api/item/IItemStack"],
+      "finalforeach/cosmicreach/util/Identifier": ["io/github/puzzle/cosmic/api/util/IIdentifier"],
+      "finalforeach/cosmicreach/world/Zone": ["io/github/puzzle/cosmic/api/world/IZone"],
+      "finalforeach/cosmicreach/world/Chunk": ["io/github/puzzle/cosmic/api/world/IChunk"],
+      "finalforeach/cosmicreach/world/World": ["io/github/puzzle/cosmic/api/world/IWorld"],
+      "finalforeach/cosmicreach/blocks/BlockState": ["io/github/puzzle/cosmic/api/block/PuzzleBlockState"],
+      "finalforeach/cosmicreach/items/containers/SlotContainer": ["io/github/puzzle/cosmic/api/item/container/PuzzleSlotContainer"]
+    }
+  }
+}
