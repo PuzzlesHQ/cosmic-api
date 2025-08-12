@@ -3,7 +3,7 @@ package io.github.puzzle.cosmic.impl.client.item;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.github.puzzle.core.loader.util.Reflection;
+import dev.puzzleshq.puzzleloader.loader.util.ReflectionUtil;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.items.HeldItemRenderParams;
@@ -47,15 +47,19 @@ public class CosmicItemModelWrapper extends ItemModel implements ICosmicItemMode
     @Override
     public void renderAsHeldItem(Vector3 vector3, Camera camera, HeldItemRenderParams heldItemRenderParams) {
         ItemStack stack = UI.hotbar.getSelectedItemStack();
-        renderAsHeldItem(
-                vector3,
-                stack,
-                camera,
-                Reflection.getFieldContents(heldItemRenderParams, "popUpTimer"),
-                Reflection.getFieldContents(heldItemRenderParams, "maxPopUpTimer"),
-                Reflection.getFieldContents(heldItemRenderParams, "swingTimer"),
-                Reflection.getFieldContents(heldItemRenderParams, "maxSwingTimer")
-        );
+        try {
+            renderAsHeldItem(
+                    vector3,
+                    stack,
+                    camera,
+                    (Float) ReflectionUtil.getField(heldItemRenderParams, "popUpTimer").get(heldItemRenderParams),
+                    (Float) ReflectionUtil.getField(heldItemRenderParams, "maxPopUpTimer").get(heldItemRenderParams),
+                    (Float) ReflectionUtil.getField(heldItemRenderParams, "swingTimer").get(heldItemRenderParams),
+                    (Float) ReflectionUtil.getField(heldItemRenderParams, "maxSwingTimer").get(heldItemRenderParams)
+            );
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

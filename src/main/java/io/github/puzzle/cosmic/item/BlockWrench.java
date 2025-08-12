@@ -1,12 +1,13 @@
 package io.github.puzzle.cosmic.item;
 
-import com.github.puzzle.game.util.BlockUtil;
+import com.badlogic.gdx.utils.Array;
+import finalforeach.cosmicreach.blocks.Block;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.entities.player.Player;
-import finalforeach.cosmicreach.items.ItemBlock;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.util.Identifier;
+import finalforeach.cosmicreach.world.BlockSetter;
 import io.github.puzzle.cosmic.util.APISide;
 
 import static io.github.puzzle.cosmic.CosmicConstants.MOD_ID;
@@ -22,10 +23,23 @@ public class BlockWrench extends AbstractCosmicItem {
     @Override
     public boolean use(APISide side, ItemSlot itemSlot, Player player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
         if ((side == APISide.SERVER || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
-            if (targetBreakBlockPos == null) return false;
-            BlockState state = targetBreakBlockPos.getBlockState();
-            if (state == null) return false;
-            BlockUtil.setBlockAt(targetBreakBlockPos.getZone(), ((ItemBlock) state.getItem().getNextSwapGroupItem()).getBlockState(), targetBreakBlockPos);
+            if (targetPlaceBlockPos == null) {
+                return false;
+            } else {
+                BlockState bs = targetPlaceBlockPos.getBlockState();
+                if (bs == null) {
+                    return false;
+                } else {
+                    Block block = bs.getBlock();
+                    Array<BlockState> states = block.blockStates.values().toArray();
+                    int i = states.indexOf(bs, true);
+                    ++i;
+                    i %= states.size;
+                    BlockState nextState = (BlockState)states.get(i);
+                    BlockSetter.get().replaceBlock(nextState, targetPlaceBlockPos);
+                    return true;
+                }
+            }
         }
         return false;
     }

@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.impl.mixin.client.item;
 
-import com.github.puzzle.core.loader.util.Reflection;
+import dev.puzzleshq.puzzleloader.loader.util.ReflectionUtil;
 import finalforeach.cosmicreach.BlockRaycasts;
 import finalforeach.cosmicreach.BlockSelection;
 import finalforeach.cosmicreach.GameSingletons;
@@ -35,8 +35,14 @@ public class InGameMixin {
             ItemStack stack = UI.hotbar.getSelectedSlot().getItemStack();
             if (stack != null && stack.getItem() instanceof IItem item) {
                 if ((ControlSettings.keyUsePlace.isPressed() && !isPressed) || (ControlSettings.keyAttackBreak.isPressed() && !isPressed)) {
-                    BlockPosition targetPlaceBlockPos = ((BlockRaycasts)Reflection.getFieldContents(blockSelection, "blockRaycasts")).getPlacingBlockPos();
-                    BlockPosition targetBreakBlockPos = ((BlockRaycasts)Reflection.getFieldContents(blockSelection, "blockRaycasts")).getBreakingBlockPos();
+                    BlockPosition targetPlaceBlockPos = null;
+                    BlockPosition targetBreakBlockPos = null;
+                    try {
+                        targetPlaceBlockPos = ((BlockRaycasts) ReflectionUtil.getField(blockSelection, "blockRaycasts").get(blockSelection)).getPlacingBlockPos();
+                        targetBreakBlockPos = ((BlockRaycasts) ReflectionUtil.getField(blockSelection, "blockRaycasts").get(blockSelection)).getBreakingBlockPos();
+                    } catch (IllegalAccessException | NoSuchFieldException e) {
+                        throw new RuntimeException(e);
+                    }
                     boolean isLeftClick = ControlSettings.keyAttackBreak.isPressed();
 
                     APISide side = APISide.SINGLE_PLAYER_CLIENT;

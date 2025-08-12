@@ -8,7 +8,8 @@
   },
   "client": [
     "client.item.ClientBlockEventsMixin",
-    "client.item.InGameMixin"
+    "client.item.InGameMixin",
+    "client.item.ItemSlotWidgetMixin"
   ],
   "mixins": [
     "account.AccountMixin",
@@ -16,7 +17,6 @@
     "block.BlockMixin",
     "block.BlockPositionMixin",
     "block.BlockStateMixin",
-    "client.item.ItemSlotWidgetMixin",
     "entity.EntityMixin",
     "entity.EntityUniqueIdMixin",
     "entity.ItemEntityMixin",

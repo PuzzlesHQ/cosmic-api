@@ -1,9 +1,9 @@
 package io.github.puzzle.cosmic.item;
 
-import com.github.puzzle.core.Constants;
-import com.github.puzzle.core.loader.meta.EnvType;
-import com.github.puzzle.core.loader.util.Reflection;
-import com.github.puzzle.game.PuzzleRegistries;
+import dev.puzzleshq.puzzleloader.cosmic.game.GameRegistries;
+import dev.puzzleshq.puzzleloader.loader.LoaderConstants;
+import dev.puzzleshq.puzzleloader.loader.util.EnvType;
+import dev.puzzleshq.puzzleloader.loader.util.ReflectionUtil;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.util.GameTag;
@@ -235,18 +235,20 @@ public class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * @param item the item to register.
      */
     public static AbstractCosmicItem register(AbstractCosmicItem item) {
-        if (EnvType.CLIENT == Constants.SIDE) {
+        if (EnvType.CLIENT == LoaderConstants.SIDE) {
             try {
                 Class<?> clazz = Class.forName("io.github.puzzle.cosmic.impl.client.item.CosmicItemModel");
-                Method method = Reflection.getMethod(clazz, "registerItemModel", Item.class);
+                Method method = ReflectionUtil.getMethod(clazz, "registerItemModel", Item.class);
                 method.invoke(null, item);
 
-            } catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException e) {
+            } catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException |
+                     NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }
-        
-        PuzzleRegistries.ITEMS.store((Identifier) item.getIdentifier(), item);
+
+        Item.registerItem(item);
+//        GameRegistries.ITEMS.store((Identifier) item.getIdentifier(), item);
         return item;
     }
 

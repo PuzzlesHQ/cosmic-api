@@ -23,8 +23,8 @@ public class ItemShader extends GameShader {
 
     public static void initItemShader() {
         DEFAULT_ITEM_SHADER = new ItemShader(
-                Identifier.of(MOD_ID,"item_shader.vert.glsl"),
-                Identifier.of(MOD_ID,"item_shader.frag.glsl"));
+                Identifier.of(MOD_ID,"shaders/item_shader.vert.glsl"),
+                Identifier.of(MOD_ID,"shaders/item_shader.frag.glsl"));
     }
 
     public void bind(Camera worldCamera) {

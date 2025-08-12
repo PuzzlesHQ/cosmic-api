@@ -5,17 +5,16 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.github.puzzle.core.loader.util.Reflection;
-import com.github.puzzle.game.mixins.client.accessors.ItemRenderAccessor;
-import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
 import com.llamalad7.mixinextras.lib.apache.commons.tuple.ImmutablePair;
 import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
+import dev.puzzleshq.puzzleloader.cosmic.game.util.IndependentAssetLoader;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.gamestates.InGame;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.RenderOrder;
+import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.rendering.items.ItemRenderer;
 import finalforeach.cosmicreach.rendering.meshes.MeshData;
 import finalforeach.cosmicreach.rendering.shaders.GameShader;
@@ -80,7 +79,7 @@ public class CosmicItemModel implements ICosmicItemModel {
 
                 if (ITEM_TEXTURE_CACHE.containsKey(item.getIdentifier() + "_" + location + "_texture")) {
                     localTex = ITEM_TEXTURE_CACHE.get(item.getIdentifier() + "_" + location + "_texture");
-                } else localTex = ItemModelBuilder.flip(PuzzleGameAssetLoader.LOADER.getResource(location, Texture.class));
+                } else localTex = ItemModelBuilder.flip(IndependentAssetLoader.loadResource(location, Texture.class));
 
                 Mesh m = null;
                 switch (modelType) {
@@ -114,7 +113,7 @@ public class CosmicItemModel implements ICosmicItemModel {
                     if (ITEM_TEXTURE_CACHE.containsKey(item.getIdentifier() + "_" + location + "_texture")) {
                         localTex = ITEM_TEXTURE_CACHE.get(item.getIdentifier() + "_" + location + "_texture");
                     } else
-                        localTex = ItemModelBuilder.flip(PuzzleGameAssetLoader.LOADER.getResource(location, Texture.class));
+                        localTex = ItemModelBuilder.flip(IndependentAssetLoader.loadResource(location, Texture.class));
 
                     Mesh m = null;
                     switch (modelType) {
@@ -254,10 +253,10 @@ public class CosmicItemModel implements ICosmicItemModel {
     }
 
     public static void registerItemModel(Item item) {
-        if (!((IItem)item).isModded()) return;
+        if (!item.isModded()) return;
 
-        ItemRenderAccessor.getRefMap().put(item, new WeakReference<>(item));
-        ObjectMap<Class<? extends Item>, Function<?, Item>> modelCreators = Reflection.getFieldContents(ItemRenderer.class, "modelCreators");
+        ItemRenderer.referenceMap.put(item, new WeakReference<>(item));
+        ObjectMap<Class<? extends Item>, Function<?, ItemModel>> modelCreators = ItemRenderer.modelCreators;
 
         if (!modelCreators.containsKey(item.getClass())) {
             registerItemModelCreator(item.getClass(), (item0) -> CosmicItemModelWrapper.wrap(new CosmicItemModel((IItem) item)));
@@ -265,7 +264,8 @@ public class CosmicItemModel implements ICosmicItemModel {
     }
 
     public static boolean hasItemModel(Item item) {
-        ObjectMap<Class<? extends Item>, Function<?, Item>> modelCreators = Reflection.getFieldContents(ItemRenderer.class, "modelCreators");
-        return ItemRenderAccessor.getRefMap().get(item) != null || modelCreators.containsKey(item.getClass());
+        ObjectMap<Class<? extends Item>, Function<?, ItemModel>> modelCreators = ItemRenderer.modelCreators;
+
+        return ItemRenderer.referenceMap.get(item) != null || modelCreators.containsKey(item.getClass());
     }
 }

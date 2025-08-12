@@ -1,4 +1,4 @@
-package io.github.puzzle.cosmic.BlockEntity;
+package io.github.puzzle.cosmic.blockentity;
 
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blockentities.BlockEntityCreator;

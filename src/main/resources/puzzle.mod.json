@@ -1,6 +1,6 @@
 {
-  "formatVersion": 2,
-  "name": "Cosmic API",
+  "formatVersion": 3,
+  "display-name": "Cosmic API",
   "id": "cosmic-api",
   "version": "${version}",
   "description": "${mod_desc}.",
@@ -12,16 +12,15 @@
     "postInit": [
       "io.github.puzzle.cosmic.CosmicServerAPI"
     ],
-    "client_postInit": [
+    "client-postInit": [
       "io.github.puzzle.cosmic.CosmicClientAPI"
     ],
-    "client_init": [
+    "client-init": [
       "io.github.puzzle.cosmic.CosmicClientAPI"
     ]
   },
   "depends": {
-
-    "puzzle-loader": ">=2.0.0"
+    "puzzle-loader-cosmic": ">=1.0.0"
   },
   "allowedSides": {
     "client": true,
@@ -46,5 +45,8 @@
       "finalforeach/cosmicreach/blocks/BlockState": ["io/github/puzzle/cosmic/api/block/PuzzleBlockState"],
       "finalforeach/cosmicreach/items/containers/SlotContainer": ["io/github/puzzle/cosmic/api/item/container/PuzzleSlotContainer"]
     }
-  }
+  },
+  "access-writers": [
+    "cosmic-api.manipulator"
+  ]
 }

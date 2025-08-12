@@ -1,29 +1,24 @@
 package io.github.puzzle.cosmic;
 
-import com.github.puzzle.core.Constants;
-import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientModInitializer;
-import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPostModInitializer;
-import com.github.puzzle.game.events.OnRegisterEvent;
+import dev.puzzleshq.puzzleloader.cosmic.core.modInitialises.ClientModInit;
+import dev.puzzleshq.puzzleloader.cosmic.core.modInitialises.ClientPostModInit;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.gamestates.InGame;
-import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.ui.UI;
 import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.item.ITickingItem;
-import io.github.puzzle.cosmic.impl.client.item.CosmicItemModel;
 import io.github.puzzle.cosmic.impl.client.item.ItemShader;
-import meteordevelopment.orbit.EventHandler;
 
-public class CosmicClientAPI implements ClientPostModInitializer, ClientModInitializer {
+public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
 
     public CosmicClientAPI() {
-        Constants.EVENT_BUS.subscribe(this);
+//        LoaderConstants.CORE_EVENT_BUS.register(this);
     }
 
     @Override
-    public void onPostInit() {
+    public void onClientPostInit() {
         GameSingletons.updateObservers.add(fixedUpdateTimeStep -> {
             if (InGame.getLocalPlayer() != null && UI.hotbar.getContainer() != null) {
                 for (int i = 0; i < UI.hotbar.getContainer().getNumSlots(); i++) {
@@ -52,15 +47,15 @@ public class CosmicClientAPI implements ClientPostModInitializer, ClientModIniti
     }
 
     @Override
-    public void onInit() {
+    public void onClientInit() {
         Threads.runOnMainThread(ItemShader::initItemShader);
     }
 
-    @EventHandler
-    public void onEvent(OnRegisterEvent event) {
-        if (event.obj instanceof Item item) {
-            if (!CosmicItemModel.hasItemModel(item))
-                CosmicItemModel.registerItemModel(item);
-        }
-    }
+//    @SubscribeEvent
+//    public void onEvent(OnRegisterEvent event) {
+//        if (event.obj instanceof Item item) {
+//            if (!CosmicItemModel.hasItemModel(item))
+//                CosmicItemModel.registerItemModel(item);
+//        }
+//    }
 }
