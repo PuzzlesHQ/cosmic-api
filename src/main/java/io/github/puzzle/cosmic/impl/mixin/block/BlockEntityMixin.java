@@ -1,5 +1,6 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
@@ -32,19 +33,55 @@ public abstract class BlockEntityMixin implements IBlockEntity {
 
     @Shadow public abstract int getGlobalZ();
 
+    @Shadow public int x;
+    @Shadow public int y;
+    @Shadow public int z;
+
     @Unique
     private final transient BlockEntity puzzleLoader$entity = (BlockEntity)(Object)this;
 
     @Unique
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
+    int lx, ly, lz;
+
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void init(CallbackInfo info) {
+        int cx = Math.floorDiv(x, 16);
+        int cy = Math.floorDiv(y, 16);
+        int cz = Math.floorDiv(z, 16);
+
+        lx = x - (16 * cx);
+        ly = y - (16 * cy);
+        lz = z - (16 * cz);
+    }
+
+    @Inject(method = "setGlobalPosition", at = @At("TAIL"))
+    private void setGlobalPosition(int x, int y, int z, CallbackInfo info) {
+        int cx = Math.floorDiv(x, 16);
+        int cy = Math.floorDiv(y, 16);
+        int cz = Math.floorDiv(z, 16);
+
+        lx = x - (16 * cx);
+        ly = y - (16 * cy);
+        lz = z - (16 * cz);
+    }
+
+    @Inject(method = "read", at = @At("TAIL"))
+    private void read(CallbackInfo info) {
+        int cx = Math.floorDiv(x, 16);
+        int cy = Math.floorDiv(y, 16);
+        int cz = Math.floorDiv(z, 16);
+
+        lx = x - (16 * cx);
+        ly = y - (16 * cy);
+        lz = z - (16 * cz);
+    }
 
     @Override
     public BlockPosition getBlockPosition() {
         return new BlockPosition(getChunk(), getLocalX(), getLocalY(), getLocalZ());
     }
-
-
 
     @Override
     public Chunk getChunk() {
@@ -60,15 +97,14 @@ public abstract class BlockEntityMixin implements IBlockEntity {
         // Implemented to prevent crash, can be overridden.
     }
 
-
     @Override
     public void updateNeighbors(BlockUpdateEvent event) {
-        ((IBlockEntity)getBlockPosition()).updateNeighbors(event);
+        getBlockPosition().updateNeighbors(event);
     }
 
     @Override
     public void updateNeighborInDirection(Direction direction, BlockUpdateEvent event) {
-        ((IBlockPosition)getBlockPosition()).updateNeighborInDirection(event, direction);
+        getBlockPosition().updateNeighborInDirection(event, direction);
     }
 
 
@@ -91,5 +127,20 @@ public abstract class BlockEntityMixin implements IBlockEntity {
     @Override
     public void setPointManifest(IDataPointManifest iDataPointManifest) {
         puzzleLoader$manifest = iDataPointManifest;
+    }
+
+    @Override
+    public int getLocalX() {
+        return lx;
+    }
+
+    @Override
+    public int getLocalY() {
+        return ly;
+    }
+
+    @Override
+    public int getLocalZ() {
+        return lz;
     }
 }

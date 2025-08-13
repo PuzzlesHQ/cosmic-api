@@ -45,26 +45,32 @@ public class InGameMixin {
                     }
                     boolean isLeftClick = ControlSettings.keyAttackBreak.isPressed();
 
-                    APISide side = APISide.SINGLE_PLAYER_CLIENT;
-                    if (!GameSingletons.isHost){
+                    if (GameSingletons.isHost){
+                        item.use(
+                                APISide.SINGLE_PLAYER_CLIENT,
+                                UI.hotbar.getSelectedSlot(),
+                                localPlayer,
+                                targetPlaceBlockPos,
+                                targetBreakBlockPos,
+                                isLeftClick
+                        );
+                    } else {
                         ItemUsePacket packet = new ItemUsePacket(
                                 UI.hotbar.getSelectedSlotNum(),
                                 targetPlaceBlockPos,
-                               targetBreakBlockPos,
+                                targetBreakBlockPos,
                                 isLeftClick
                         );
                         ClientNetworkManager.sendAsClient(packet);
-                        side = APISide.REMOTE_CLIENT;
+                        item.use(
+                                APISide.REMOTE_CLIENT,
+                                UI.hotbar.getSelectedSlot(),
+                                localPlayer,
+                                targetPlaceBlockPos,
+                                targetBreakBlockPos,
+                                isLeftClick
+                        );
                     }
-
-                    item.use(
-                            side,
-                             UI.hotbar.getSelectedSlot(),
-                            localPlayer,
-                            targetPlaceBlockPos,
-                            targetBreakBlockPos,
-                            isLeftClick
-                    );
                     isPressed = true;
                 }
                 if ((isPressed && !ControlSettings.keyUsePlace.isPressed()) && (isPressed && !ControlSettings.keyAttackBreak.isPressed())) isPressed = false;

@@ -37,9 +37,10 @@ public abstract class BlockPositionMixin implements IBlockPosition {
 
     @Inject(method = "setBlockState", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState targetBlockState, CallbackInfo ci) {
-        updateNeighbors(new BlockUpdateEvent());
+        BlockUpdateEvent event = new BlockUpdateEvent();
+        event.setSourcePosition((BlockPosition) (Object) this);
+        updateNeighbors(event);
     }
-
 
     @Override
     public Chunk getChunk() {
@@ -67,6 +68,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
             if (offs == null) continue;
 
             IBlockEntity entity = offs.getBlockEntity();
+            if (event.getSourcePosition().equals((BlockPosition) (Object) this)) continue;
 
             if (entity != null)
                 entity.updateNeighbors(event);
