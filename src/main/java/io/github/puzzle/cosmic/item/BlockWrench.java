@@ -24,21 +24,21 @@ public class BlockWrench extends AbstractCosmicItem {
     public boolean use(APISide side, ItemSlot itemSlot, Player player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
         if ((side == APISide.SERVER || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
             if (targetBreakBlockPos == null) {
-                return false;
+                return true;
             } else {
+                if (targetPlaceBlockPos.chunk == null) return true;
                 BlockState bs = targetBreakBlockPos.getBlockState();
-                System.out.println(bs + " " + targetPlaceBlockPos + " " + targetBreakBlockPos);
                 if (bs == null) {
-                    return false;
+                    return true;
                 } else {
                     Block block = bs.getBlock();
                     Array<BlockState> states = block.blockStates.values().toArray();
                     int i = states.indexOf(bs, true);
                     ++i;
                     i %= states.size;
-                    BlockState nextState = (BlockState)states.get(i);
+                    BlockState nextState = states.get(i);
                     BlockSetter.get().replaceBlock(nextState, targetBreakBlockPos);
-                    return true;
+                    return false;
                 }
             }
         }

@@ -259,7 +259,7 @@ public class CosmicItemModel implements ICosmicItemModel {
         ObjectMap<Class<? extends Item>, Function<?, ItemModel>> modelCreators = ItemRenderer.modelCreators;
 
         if (!modelCreators.containsKey(item.getClass())) {
-            registerItemModelCreator(item.getClass(), (item0) -> CosmicItemModelWrapper.wrap(new CosmicItemModel((IItem) item)));
+            registerItemModelCreator(item.getClass(), (item0) -> CosmicItemModelWrapper.wrap(new CosmicItemModel(item)));
         }
     }
 

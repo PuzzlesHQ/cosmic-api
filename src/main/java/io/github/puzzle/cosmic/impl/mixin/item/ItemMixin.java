@@ -1,5 +1,7 @@
 package io.github.puzzle.cosmic.impl.mixin.item;
 
+import dev.puzzleshq.puzzleloader.loader.LoaderConstants;
+import dev.puzzleshq.puzzleloader.loader.util.EnvType;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.item.IItem;
@@ -19,6 +21,8 @@ public interface ItemMixin extends IItem {
 
     @Inject(method = "registerItem", at = @At("TAIL"))
     private static void register(Item item, CallbackInfo ci) {
+        if (LoaderConstants.SIDE.equals(EnvType.SERVER)) return;
+
         if (!CosmicItemModel.hasItemModel(item))
             CosmicItemModel.registerItemModel(item);
     }
