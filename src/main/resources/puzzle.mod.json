@@ -12,6 +12,9 @@
     "postInit": [
       "io.github.puzzle.cosmic.CosmicServerAPI"
     ],
+    "init": [
+      "io.github.puzzle.cosmic.CosmicServerAPI"
+    ],
     "client-postInit": [
       "io.github.puzzle.cosmic.CosmicClientAPI"
     ],
@@ -20,7 +23,7 @@
     ]
   },
   "depends": {
-    "puzzle-loader-cosmic": ">=1.0.0"
+    "puzzle-loader-core": ">=1.0.9-alpha"
   },
   "allowedSides": {
     "client": true,

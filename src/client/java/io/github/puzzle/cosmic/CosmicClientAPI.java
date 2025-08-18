@@ -2,6 +2,9 @@ package io.github.puzzle.cosmic;
 
 import dev.puzzleshq.puzzleloader.cosmic.core.modInitialises.ClientModInit;
 import dev.puzzleshq.puzzleloader.cosmic.core.modInitialises.ClientPostModInit;
+import dev.puzzleshq.puzzleloader.cosmic.game.GameRegistries;
+import dev.puzzleshq.puzzleloader.cosmic.game.events.net.EventRegisterPacket;
+import dev.puzzleshq.puzzleloader.loader.LoaderConstants;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.gamestates.InGame;
@@ -10,11 +13,18 @@ import finalforeach.cosmicreach.ui.UI;
 import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.item.ITickingItem;
 import io.github.puzzle.cosmic.impl.client.item.ItemShader;
+import io.github.puzzle.cosmic.impl.network.item.ItemUsePacket;
+import net.neoforged.bus.api.SubscribeEvent;
 
 public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
 
     public CosmicClientAPI() {
-//        LoaderConstants.CORE_EVENT_BUS.register(this);
+        GameRegistries.NETWORK_EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public void register(EventRegisterPacket event) {
+        event.registerPacket("item-use", 9003, ItemUsePacket.class);
     }
 
     @Override

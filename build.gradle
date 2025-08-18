@@ -5,11 +5,11 @@ plugins {
 }
 
 loom {
-//    splitEnvironmentSourceSets()
+    splitEnvironmentSourceSets()
     mods {
-        "example-mod" { //TODO: Fix
+        "cosmic-api" { //TODO: Fix
             sourceSet sourceSets.main
-            //sourceSet sourceSets.client
+            sourceSet sourceSets.client
         }
     }
     accessWidenerPath = file("src/main/resources/cosmic-api.manipulator")
@@ -24,6 +24,12 @@ sourceSets {
         resources {
             srcDirs "src/main/resources"
             srcDirs "api/src/main/resources"
+        }
+    }
+    client {
+        java {
+            srcDirs "src/main/java"
+            srcDirs "api/src/main/java"
         }
     }
 	//client {

@@ -1,5 +1,6 @@
 package io.github.puzzle.cosmic.impl.network.item;
 
+import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.ItemSlot;
@@ -32,18 +33,26 @@ public class ItemUsePacket extends GamePacket {
     @Override
     public void receive(ByteBuf in) {
         this.slotId = this.readInt(in);
-        this.targetPlaceBlockPos = this.readBlockPositionZoneless(in);
-        this.targetBreakBlockPos = this.readBlockPositionZoneless(in);
+        int lossIdx = this.readByte(in);
+        System.out.println(lossIdx);
+        if ((lossIdx & 1) == 0) this.targetPlaceBlockPos = this.readBlockPosition(in, GameSingletons.world.getZoneIfExists(this.readString(in)));
+        if ((lossIdx & 2) == 0) this.targetBreakBlockPos = this.readBlockPosition(in, GameSingletons.world.getZoneIfExists(this.readString(in)));
         this.usedLeftClick = this.readBoolean(in);
     }
 
     @Override
     public void write() {
         this.writeInt(this.slotId);
+        int lidx = 0;
+        if (this.targetPlaceBlockPos == null) lidx |= 1;
+        if (this.targetBreakBlockPos == null) lidx |= 2;
+        this.writeByte(lidx);
         if (this.targetPlaceBlockPos != null) {
+            this.writeString(targetPlaceBlockPos.getZone().zoneId);
             this.writeBlockPosition(this.targetPlaceBlockPos);
         }
         if (this.targetBreakBlockPos != null) {
+            this.writeString(targetBreakBlockPos.getZone().zoneId);
             this.writeBlockPosition(this.targetBreakBlockPos);
         }
         this.writeBoolean(this.usedLeftClick);
@@ -54,15 +63,13 @@ public class ItemUsePacket extends GamePacket {
         if (identity.getSide() == NetworkSide.CLIENT) return;
 
         Player player = identity.getPlayer();
-        Zone zone =identity.getZone();
 
         ItemSlot slot = player.inventory.getSlot(slotId);
         ItemStack stack = slot != null ? slot.getItemStack() : null;
-        if (this.targetPlaceBlockPos != null) this.targetPlaceBlockPos.convertToLocal(zone);
-        if (this.targetBreakBlockPos != null) this.targetBreakBlockPos.convertToLocal(zone);
 
+        System.out.println(slotId + " " + slot);
         if (stack != null) {
-            ((IItem)stack.getItem()).use(APISide.SERVER, slot, player, targetPlaceBlockPos, targetBreakBlockPos, usedLeftClick);
+            stack.getItem().use(APISide.SERVER, slot, player, targetPlaceBlockPos, targetBreakBlockPos, usedLeftClick);
         }
     }
 }

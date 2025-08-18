@@ -9,6 +9,8 @@
   "client": [
     "client.item.ClientBlockEventsMixin",
     "client.item.InGameMixin",
+    "client.item.ItemSlotWidgetMixin",
+    "client.item.ItemRegisterMixin",
     "client.item.ItemSlotWidgetMixin"
   ],
   "mixins": [

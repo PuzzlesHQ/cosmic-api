@@ -22,6 +22,7 @@ public class BlockWrench extends AbstractCosmicItem {
 
     @Override
     public boolean use(APISide side, ItemSlot itemSlot, Player player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
+        System.out.println(targetPlaceBlockPos + " " + targetBreakBlockPos);
         if ((side == APISide.SERVER || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
             if (targetBreakBlockPos == null) {
                 return true;
