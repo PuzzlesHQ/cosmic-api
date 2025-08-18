@@ -4,7 +4,6 @@ import dev.puzzleshq.puzzleloader.cosmic.core.modInitialises.ClientModInit;
 import dev.puzzleshq.puzzleloader.cosmic.core.modInitialises.ClientPostModInit;
 import dev.puzzleshq.puzzleloader.cosmic.game.GameRegistries;
 import dev.puzzleshq.puzzleloader.cosmic.game.events.net.EventRegisterPacket;
-import dev.puzzleshq.puzzleloader.loader.LoaderConstants;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.gamestates.InGame;

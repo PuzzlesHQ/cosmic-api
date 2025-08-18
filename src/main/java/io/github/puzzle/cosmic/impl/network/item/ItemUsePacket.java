@@ -8,8 +8,6 @@ import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.networking.GamePacket;
 import finalforeach.cosmicreach.networking.NetworkIdentity;
 import finalforeach.cosmicreach.networking.NetworkSide;
-import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.util.APISide;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
