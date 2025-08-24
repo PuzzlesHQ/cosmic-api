@@ -54,6 +54,7 @@ repositories {
 dependencies {
     cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
 }
+
 processResources() {
     duplicatesStrategy = 'EXCLUDE'
 }
