@@ -50,8 +50,14 @@ repositories {
     }
 }
 
+String[] strings = project.version.toString().split("-");
+
 dependencies {
-    cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
+
+    if (strings.length == 2)
+        cosmicReach("finalforeach:cosmicreach:${strings[1]}")
+    else
+        cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
 }
 
 processResources() {
@@ -66,7 +72,7 @@ processResources {
     def replaceProperties = [
             "mod_version"     : version,
             "mod_desc"       :  desc,
-            "version"       :  project.version,
+            "version"       :  project.version.toString().split("-")[0],
 //            "cr_version"          : cosmic_reach_version,
     ]
 
