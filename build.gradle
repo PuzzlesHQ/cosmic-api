@@ -53,11 +53,7 @@ repositories {
 String[] strings = project.version.toString().split("-");
 
 dependencies {
-
-    if (strings.length == 2)
-        cosmicReach("finalforeach:cosmicreach:${strings[1]}")
-    else
-        cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
+    cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
 }
 
 processResources() {
