@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "jigsaw"
+    id 'maven-publish'
     id 'com.gradleup.shadow'
 }
 
@@ -79,5 +80,17 @@ processResources {
     replaceProperties.put "project", project
     filesMatching(resourceTargets) {
         expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = p_group
+            artifactId = p_id
+            version = this.version
+
+            artifact source: jar, extension: 'jar'
+        }
     }
 }
