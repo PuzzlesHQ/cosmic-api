@@ -50,7 +50,9 @@ repositories {
     }
 }
 
-String[] strings = project.version.toString().split("-");
+jar {
+    duplicatesStrategy = 'EXCLUDE'
+}
 
 dependencies {
     cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
