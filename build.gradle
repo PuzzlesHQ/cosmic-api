@@ -100,7 +100,7 @@ publishing {
             artifactId = p_id
             version = this.version
 
-            artifact source: jar, extension: 'jar'
+            artifact source: buildMergedBundleJar, extension: 'jar'
         }
     }
 }
