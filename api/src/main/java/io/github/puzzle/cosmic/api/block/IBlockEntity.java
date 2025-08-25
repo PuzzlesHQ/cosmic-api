@@ -20,33 +20,43 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("BlockEntity")
 public interface IBlockEntity extends ICRBinSerializable {
 
+    /**
+     * Gets the Local X of the blockEntity.
+     */
+    default int getLocalX() {
+        return Integer.MAX_VALUE;
+    }
 
     /**
      * Gets the Local X of the blockEntity.
      */
-    int getLocalX();
-    /**
-     * Gets the Local X of the blockEntity.
-     */
-    int getLocalY();
+    default int getLocalY() {
+        return Integer.MAX_VALUE;
+    }
 
     /**
      * Gets the Local X of the blockEntity.
      */
-    int getLocalZ();
+    default int getLocalZ() {
+        return Integer.MAX_VALUE;
+    }
 
     /**
      * Gets the blockPosition of the blockEntity.
      *
      * @return a {@link BlockPosition}
      */
-    BlockPosition getBlockPosition();
+    default BlockPosition getBlockPosition() {
+        return null;
+    }
 
     /**
      * Gets the chunk of the blockEntity.
      * @return a {@link Chunk}
      */
-    Chunk getChunk();
+    default Chunk getChunk() {
+        return null;
+    }
 
 
     /**
@@ -54,7 +64,8 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @param event event to update the blockEntity with.
      * @see BlockUpdateEvent
      */
-    void updateNeighbors(BlockUpdateEvent event);
+    default void updateNeighbors(BlockUpdateEvent event) {
+    }
 
     /**
      * Updates the neighbouring blockEntity in a direction.
@@ -63,39 +74,48 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @see Direction
      * @see BlockUpdateEvent
      */
-    void updateNeighborInDirection(Direction direction, BlockUpdateEvent event);
+    default void updateNeighborInDirection(Direction direction, BlockUpdateEvent event) {
+    }
 
     /**
      * Triggered when the blockEntity is updated.
      * @param event the event the blockEntity is updated with.
      * @see BlockUpdateEvent
      */
-    void onNeighborUpdate(BlockUpdateEvent event);
+    default void onNeighborUpdate(BlockUpdateEvent event) {
+    }
 
     /**
      * Gets the slotContainer of the BlockEntity.
      * @return a {@link SlotContainer} will be {@code null} if the blockEntity has no slotContainer.
      */
-    SlotContainer getSlotContainer();
+    default SlotContainer getSlotContainer() {
+        return null;
+    }
 
     /**
      * Gets the point manifest of the blockEntity.
      * @return a {@link IDataPointManifest}
      */
-    IDataPointManifest getPointManifest();
+    default IDataPointManifest getPointManifest() {
+        return null;
+    }
 
     /**
      * Sets the point manifest of the blockEntity.
      * @param manifest The new point manifest to be set.
      */
-    void setPointManifest(IDataPointManifest manifest);
+    default void setPointManifest(IDataPointManifest manifest) {
+    }
 
     // ICRBinSerializable.java methods
 
     @Override
-    void read(CRBinDeserializer deserial);
+    default void read(CRBinDeserializer deserial) {
+    }
 
     @Override
-    void write(CRBinSerializer serial);
+    default void write(CRBinSerializer serial) {
+    }
 
 }

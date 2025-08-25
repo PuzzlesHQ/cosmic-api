@@ -6,7 +6,7 @@ plugins {
 }
 
 //if (version == null) {
-    version = fallback_version
+//    version = fallback_version
 //}
 
 loom {

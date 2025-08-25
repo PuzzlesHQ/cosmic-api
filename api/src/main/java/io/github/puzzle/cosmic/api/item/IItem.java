@@ -39,7 +39,7 @@ public interface IItem {
     }
 
     @Internal
-    void setModded(boolean m);
+    default void setModded(boolean m) {}
 
     @Internal
     default boolean isModded() {
