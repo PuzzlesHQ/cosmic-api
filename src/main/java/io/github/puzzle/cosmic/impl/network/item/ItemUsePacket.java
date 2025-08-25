@@ -1,6 +1,5 @@
 package io.github.puzzle.cosmic.impl.network.item;
 
-import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.ItemSlot;
@@ -8,6 +7,7 @@ import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.networking.GamePacket;
 import finalforeach.cosmicreach.networking.NetworkIdentity;
 import finalforeach.cosmicreach.networking.NetworkSide;
+import finalforeach.cosmicreach.singletons.GameSingletons;
 import io.github.puzzle.cosmic.util.APISide;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

@@ -1,8 +1,8 @@
 package io.github.puzzle.cosmic.impl.mixin.entity.player;
 
-import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
+import finalforeach.cosmicreach.singletons.GameSingletons;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.util.annotation.Internal;

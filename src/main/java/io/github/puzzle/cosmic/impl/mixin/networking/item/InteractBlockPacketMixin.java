@@ -19,7 +19,7 @@ public class InteractBlockPacketMixin {
     private boolean useItem(ItemStack instance, ItemSlot itemSlot, Player player, BlockPosition targetBlockPos, Direction faceDirection, Vector3 intersection) {
 //        IItem.as(instance.getItem())._use(APISide.SERVER, itemSlot, player, null, targetBlockPos, false);
         if (!((IItem) instance.getItem()).isModded())
-            return instance.getItem().useItem(itemSlot, player, targetBlockPos, faceDirection, intersection);
+            return instance.useItem(itemSlot, player, targetBlockPos, faceDirection, intersection);
         return false;
     }
 
