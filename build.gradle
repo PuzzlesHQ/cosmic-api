@@ -93,16 +93,17 @@ processResources {
     }
 }
 
-if (version.toString() != "unspecified") {
+if (System.getenv("JITPACK") == "true") {
     publishing {
         publications {
             maven(MavenPublication) {
                 groupId = p_group
                 artifactId = p_id
-                version = this.version
+                version = project.version
 
                 artifact source: buildMergedBundleJar, extension: 'jar'
             }
         }
     }
+
 }
