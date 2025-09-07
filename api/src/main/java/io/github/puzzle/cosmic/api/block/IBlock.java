@@ -2,21 +2,21 @@ package io.github.puzzle.cosmic.api.block;
 
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
  *
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@ApiGen("Block")
 public interface IBlock {
 
     /**
      * Gets all the blockState of the block.
      * @return a {@link BlockStateMap} of the BlockStates.
      */
-    BlockStateMap getStates();
+    default BlockStateMap getStates() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 
     /**
@@ -24,7 +24,9 @@ public interface IBlock {
      *
      * @return a {@link Identifier}
      */
-    Identifier getIdentifier();
+    default Identifier getIdentifier() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 
     interface BlockStateMap {

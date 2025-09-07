@@ -59,7 +59,6 @@ public class AbstractCosmicItem implements IGameTagged, Item, IItem {
 
     @Override
     public void setPointManifest(IDataPointManifest manifest) {
-        //TODO: see if works, plz
         this.manifest = (DataPointManifest) manifest;
     }
 
@@ -74,9 +73,7 @@ public class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     @Override
-    public void setModded(boolean m) {
-        //TODO: implement
-    }
+    public void setModded(boolean m) {} // no need to implement since this is true by default.
 
     @Override
     public String getID() {

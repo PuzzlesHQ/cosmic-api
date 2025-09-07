@@ -4,14 +4,12 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
  *
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@ApiGen("ItemStack")
 public interface IItemStack extends ICRBinSerializable {
 
 
@@ -19,19 +17,27 @@ public interface IItemStack extends ICRBinSerializable {
      * Gets the point manifest of the itemStack.
      * @return a {@link IDataPointManifest}
      */
-    IDataPointManifest getPointManifest();
+    default IDataPointManifest getPointManifest() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Sets the point manifest of the itemStack.
      * @param manifest The new point manifest to be set.
      */
-    void setPointManifest(IDataPointManifest manifest);
+    default void setPointManifest(IDataPointManifest manifest) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     // ICRBinSerializable.java methods
 
     @Override
-    void read(CRBinDeserializer crBinDeserializer);
+    default void read(CRBinDeserializer crBinDeserializer) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     @Override
-    void write(CRBinSerializer crBinSerializer);
+    default void write(CRBinSerializer crBinSerializer) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 }

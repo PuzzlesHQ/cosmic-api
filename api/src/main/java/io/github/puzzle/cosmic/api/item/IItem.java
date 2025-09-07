@@ -8,14 +8,12 @@ import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.util.APISide;
 import io.github.puzzle.cosmic.util.annotation.Internal;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
  *
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@ApiGen("Item")
 public interface IItem {
 
     /**
@@ -84,13 +82,17 @@ public interface IItem {
      * Gets the point manifest of the item.
      * @return a {@link IDataPointManifest}
      */
-    IDataPointManifest getPointManifest();
+    default IDataPointManifest getPointManifest() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * set the point manifest of the item.
      * @param manifest The new point manifest to be set.
      */
-    void setPointManifest(IDataPointManifest manifest);
+    default void setPointManifest(IDataPointManifest manifest) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     enum ItemModelType {
         ITEM_MODEL_2D,

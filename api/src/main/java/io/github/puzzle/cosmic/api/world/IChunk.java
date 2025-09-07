@@ -4,7 +4,6 @@ import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.rendering.IChunkMeshGroup;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;
 
@@ -13,7 +12,6 @@ import java.util.function.Consumer;
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@ApiGen("Chunk")
 public interface IChunk {
 
 
@@ -113,7 +111,13 @@ public interface IChunk {
          */
         boolean isEmpty();
     }
-    IMeshingController getMeshingController();
 
-    IBlockEntityController getBlockEntityController();
+    default IMeshingController getMeshingController() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
+
+    default IBlockEntityController getBlockEntityController() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
+
 }

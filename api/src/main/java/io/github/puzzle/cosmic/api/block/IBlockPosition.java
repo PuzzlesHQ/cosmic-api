@@ -19,7 +19,9 @@ public interface IBlockPosition {
      * @return a {@link Chunk}
      */
     @Nullable
-    Chunk getChunk();
+    default Chunk getChunk() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    };
 
 
 
@@ -28,7 +30,9 @@ public interface IBlockPosition {
      * @param blockState blockState of the blockEntity.
      * @param blockEntity the blockEntity to set.
      */
-    void setBlockEntityDirect(PuzzleBlockState blockState, IBlockEntity blockEntity);
+    default void setBlockEntityDirect(PuzzleBlockState blockState, IBlockEntity blockEntity)  {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Checks if the blockPosition has a blockEntity.
@@ -44,14 +48,18 @@ public interface IBlockPosition {
      * @param y new Y.
      * @param z new Z.
      */
-    void setGlobal(Zone zone, float x, float y, float z);
+    default void setGlobal(Zone zone, float x, float y, float z)  {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Updates the neighbouring blockEntity.
      * @param event event to update the blockEntity with.
      * @see BlockUpdateEvent
      */
-    void updateNeighbors(BlockUpdateEvent event);
+    default void updateNeighbors(BlockUpdateEvent event)  {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Updates the neighbouring blockEntity in a direction.
@@ -60,5 +68,8 @@ public interface IBlockPosition {
      * @see Direction
      * @see BlockUpdateEvent
      */
-    void updateNeighborInDirection(BlockUpdateEvent event, Direction direction);
+    default void updateNeighborInDirection(BlockUpdateEvent event, Direction direction)  {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
+
 }

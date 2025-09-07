@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.util.annotation.Note;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * @since 0.3.26
  */
 
-@ApiGen("SlotContainer")
 @Note("This interface only applies to SlotContainer and not ISlotContainer internally.")
 public interface PuzzleSlotContainer {
 
@@ -23,39 +21,51 @@ public interface PuzzleSlotContainer {
      * @param zone the zone the item will be drop in.
      * @param position the position where the items will be dropped.
      */
-    void dropAllItems(Zone zone, Vector3 position);
+    default void dropAllItems(Zone zone, Vector3 position) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets the first full itemSlot.
      *
      * @return a {@link ItemSlot}
      */
-    ItemSlot getFirstFullItemSlot();
+    default ItemSlot getFirstFullItemSlot() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets all the itemSlots in the slotContainer as a list.
      *
      * @return a list of {@link ItemSlot}
      */
-    List<ItemSlot> getSlots();
+    default List<ItemSlot> getSlots() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets all the input itemSlots in the slotContainer as a list.
      *
      * @return a list of {@link ItemSlot}
      */
-    List<ItemSlot> getInputSlots();
+    default List<ItemSlot> getInputSlots() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets all the output itemSlots in the slotContainer as a list.
      *
      * @return a list of {@link ItemSlot}
      */
-    List<ItemSlot> getOutputSlots();
+    default List<ItemSlot> getOutputSlots() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Clears all itemSlots by removing their itemStack.
      */
-    void clear();
+    default void clear() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 }

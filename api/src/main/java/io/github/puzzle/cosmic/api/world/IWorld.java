@@ -3,7 +3,6 @@ package io.github.puzzle.cosmic.api.world;
 import finalforeach.cosmicreach.world.Zone;
 import finalforeach.cosmicreach.worldgen.ZoneGenerator;
 import io.github.puzzle.cosmic.util.annotation.Note;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.Collection;
 import java.util.Set;
@@ -14,14 +13,15 @@ import java.util.Set;
  * @since 0.3.26
  */
 @Note("A lot of zone addition or creation methods on the world class got redirected/relocated into the new class called IZoneMap for API cleanliness.")
-@ApiGen("World")
 public interface IWorld {
 
     /**
      * Gets the zone map.
      * @return a {@link IZoneMap}
      */
-    IZoneMap getZoneMap();
+    default IZoneMap getZoneMap() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     interface IZoneMap {
 

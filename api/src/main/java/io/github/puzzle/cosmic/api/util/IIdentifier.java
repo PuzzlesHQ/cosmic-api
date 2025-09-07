@@ -8,5 +8,8 @@ package io.github.puzzle.cosmic.api.util;
  */
 public interface IIdentifier {
 
-    String asString();
+    default String asString() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
+
 }

@@ -14,18 +14,24 @@ public interface IPlayer {
      * Gets the zone the player is in.
      * @return a {@link Zone}
      */
-    Zone getZone();
+    default Zone getZone() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets the player position as a blockPosition.
      * @return a {@link BlockPosition}
      */
-    BlockPosition getBlockPosition();
+    default BlockPosition getBlockPosition() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 
     /**
      * Checks if the player is loading.
      */
-    boolean isLoading();
+    default boolean isLoading() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 }

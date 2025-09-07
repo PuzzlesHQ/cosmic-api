@@ -7,7 +7,6 @@ import finalforeach.cosmicreach.entities.EntityUniqueId;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Chunk;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;
 
@@ -16,26 +15,31 @@ import java.util.function.Consumer;
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@ApiGen("Zone")
 public interface IZone {
 
     /**
      * Gets the chunk manager of the zone.
      * @return a {@link IChunkManager}
      */
-    IChunkManager getChunkManager();
+    default IChunkManager getChunkManager() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets the player manager of the zone.
      * @return a {@link IPlayerManager}
      */
-    IPlayerManager getPlayerManager();
+    default IPlayerManager getPlayerManager() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets the entity manager of the zone.
      * @return a {@link IEntityManager}
      */
-    IEntityManager getEntityManager();
+    default IEntityManager getEntityManager() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     interface IChunkManager {
 
@@ -175,13 +179,17 @@ public interface IZone {
     /**
      * Gets the zoneID as a string.
      */
-    String getStringID();
+    default String getStringID() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets the zoneID.
      *
      * @return a {@link Identifier}
      */
-    Identifier getId();
+    default Identifier getId() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 }

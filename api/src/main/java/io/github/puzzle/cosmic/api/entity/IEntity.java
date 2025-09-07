@@ -18,33 +18,45 @@ public interface IEntity extends ICRBinSerializable {
     /**
      * Gets the view direction of the entity.
      */
-    Vector3 getViewDirection();
+    default Vector3 getViewDirection() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 
     /**
      * Gets the entities' ID.
      * @return a {@link Identifier}
      */
-    Identifier getEntityId();
+    default Identifier getEntityId() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Gets the point manifest of the entity.
      * @return a {@link IDataPointManifest}
      */
-    IDataPointManifest getPointManifest();
+    default IDataPointManifest getPointManifest() {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     /**
      * Sets the point manifest of the entity.
      * @param manifest The new point manifest to be set.
      */
-    void setPointManifest(IDataPointManifest manifest);
+    default void setPointManifest(IDataPointManifest manifest) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     // ICRBinSerializable.java methods
 
     @Override
-    void read(CRBinDeserializer crBinDeserializer);
+    default void read(CRBinDeserializer crBinDeserializer) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
     @Override
-    void write(CRBinSerializer crBinSerializer);
+    default void write(CRBinSerializer crBinSerializer) {
+        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
+    }
 
 }

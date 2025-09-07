@@ -9,7 +9,6 @@ import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 
 /**
@@ -17,7 +16,6 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@ApiGen("BlockEntity")
 public interface IBlockEntity extends ICRBinSerializable {
 
     /**
