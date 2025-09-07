@@ -79,9 +79,9 @@ processResources {
 
     // Left item is the name in the target, right is the varuable name
     def replaceProperties = [
-            "mod_version"     : version,
+            "mod_version"     : version.toString() == "unspecified" ? "0.0.0" : version,
             "mod_desc"       :  desc,
-            "version"       :  project.version.toString().split("-")[0],
+            "version"       :  (project.version.toString() == "unspecified" ? "0.0.0" : project.version).toString().split("-")[0],
 //            "cr_version"          : cosmic_reach_version,
     ]
 
@@ -93,14 +93,16 @@ processResources {
     }
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = p_group
-            artifactId = p_id
-            version = this.version
+if (version.toString() != "unspecified") {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId = p_group
+                artifactId = p_id
+                version = this.version
 
-            artifact source: buildMergedBundleJar, extension: 'jar'
+                artifact source: buildMergedBundleJar, extension: 'jar'
+            }
         }
     }
 }
