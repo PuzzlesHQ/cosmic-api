@@ -35,7 +35,7 @@ public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
 
                     if (slot != null) {
                         if (slot.getItemStack() != null && slot.getItemStack().getItem() instanceof ITickingItem item) {
-                            item.tickStack(fixedUpdateTimeStep, (IItemStack) slot.getItemStack(), UI.hotbar.getSelectedSlot() == slot);
+                            item.tickStack(fixedUpdateTimeStep, slot.getItemStack(), UI.hotbar.getSelectedSlot() == slot);
                         }
                     }
                 }
@@ -46,7 +46,7 @@ public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
 
                         if (slot != null && slot.getItemStack() != null) {
                             if (slot.getItemStack().getItem() instanceof ITickingItem item) {
-                                item.tickStack(fixedUpdateTimeStep, (IItemStack) slot.getItemStack(), false);
+                                item.tickStack(fixedUpdateTimeStep, slot.getItemStack(), false);
                             }
                         }
                     }
