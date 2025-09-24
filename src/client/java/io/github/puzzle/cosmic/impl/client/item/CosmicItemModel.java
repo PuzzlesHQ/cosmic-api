@@ -152,7 +152,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     public void renderGeneric(Vector3 pos, ItemStack stack, Camera cam, Matrix4 tmpMatrix, boolean isSlot) {
         IDataPointManifest stackManifest;
         try {
-            stackManifest = ((IItemStack)stack).getPointManifest();
+            stackManifest = stack.getPointManifest();
         } catch (Exception ignore) {
             stackManifest = null;
         }

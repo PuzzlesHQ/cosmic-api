@@ -22,7 +22,7 @@ public class ItemEntityMixin {
     @Inject(method = "update", at = @At("HEAD"), remap = false)
     private void update(Zone zone, float deltaTime, CallbackInfo ci) {
         if (itemStack.getItem() instanceof ITickingItem tickingItem) {
-            tickingItem.tickEntity((IZone) zone, deltaTime, (IEntity) this, (IItemStack) itemStack);
+            tickingItem.tickEntity(zone, deltaTime, (IEntity) this, itemStack);
         }
     }
 
