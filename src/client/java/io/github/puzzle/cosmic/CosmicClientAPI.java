@@ -9,7 +9,6 @@ import finalforeach.cosmicreach.gamestates.InGame;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.singletons.GameSingletons;
 import finalforeach.cosmicreach.ui.UI;
-import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.item.ITickingItem;
 import io.github.puzzle.cosmic.impl.client.item.ItemShader;
 import io.github.puzzle.cosmic.impl.network.item.ItemUsePacket;
@@ -30,15 +29,6 @@ public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
     public void onClientPostInit() {
         GameSingletons.updateObservers.add(fixedUpdateTimeStep -> {
             if (InGame.getLocalPlayer() != null && UI.hotbar.getContainer() != null) {
-                for (int i = 0; i < UI.hotbar.getContainer().getNumSlots(); i++) {
-                    ItemSlot slot = UI.hotbar.getContainer().getSlot(i);
-
-                    if (slot != null) {
-                        if (slot.getItemStack() != null && slot.getItemStack().getItem() instanceof ITickingItem item) {
-                            item.tickStack(fixedUpdateTimeStep, slot.getItemStack(), UI.hotbar.getSelectedSlot() == slot);
-                        }
-                    }
-                }
 
                 for (int ic = 0; ic < UI.openContainers.size; ic++) {
                     for (int i = 0; i < UI.openContainers.get(ic).getNumSlots(); i++) {
@@ -46,7 +36,11 @@ public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
 
                         if (slot != null && slot.getItemStack() != null) {
                             if (slot.getItemStack().getItem() instanceof ITickingItem item) {
-                                item.tickStack(fixedUpdateTimeStep, slot.getItemStack(), false);
+                                if (UI.openContainers.get(ic) == UI.hotbar.getContainer()){
+                                    item.tickStack(fixedUpdateTimeStep, slot.getItemStack(), UI.hotbar.getSelectedSlot() == slot);
+                                } else {
+                                    item.tickStack(fixedUpdateTimeStep, slot.getItemStack(), false);
+                                }
                             }
                         }
                     }
