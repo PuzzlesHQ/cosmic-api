@@ -8,8 +8,7 @@ public class CheckBoard extends AbstractCosmicItem {
 
     public CheckBoard() {
         super(Identifier.of("puzzle-loader", "checker_board"));
-        manifest.put(ItemDataPointSpecs.MODEL_TYPE.create(ItemModelType.ITEM_MODEL_3D));
-        manifest.put(ItemDataPointSpecs.TEXTURE_LOCATION.create(Identifier.of(MOD_ID, "checker_board.png")));
+        addTexture(ItemModelType.ITEM_MODEL_3D, Identifier.of(MOD_ID, "checker_board.png"));
     }
 
     @Override

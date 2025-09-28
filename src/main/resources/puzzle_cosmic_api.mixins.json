@@ -10,7 +10,8 @@
     "client.item.ClientBlockEventsMixin",
     "client.item.InGameMixin",
     "client.item.ItemRegisterMixin",
-    "client.item.ItemSlotWidgetMixin"
+    "client.item.ItemSlotWidgetMixin",
+    "client.entity.EntityMixin"
   ],
   "mixins": [
     "account.AccountMixin",

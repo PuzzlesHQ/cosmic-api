@@ -12,13 +12,14 @@ public class ItemModelBuilder {
 
         public static Mesh build2DMesh() {
             builder.begin(ItemShader.DEFAULT_ITEM_SHADER.allVertexAttributesObj, GL20.GL_TRIANGLES);
-            return buildItemRects(0, true);
+            buildItemRects(0);
+            return builder.end();
         }
 
         public static Mesh build2_5DMesh(Texture texture) {
             builder.begin(ItemShader.DEFAULT_ITEM_SHADER.allVertexAttributesObj, GL20.GL_TRIANGLES);
             buildMeshSides(texture);
-            buildItemRects((1f / texture.getWidth()), false);
+            buildItemRects((1f / texture.getWidth()));
             return builder.end();
         }
 
@@ -116,7 +117,7 @@ public class ItemModelBuilder {
             }
         }
 
-        public static Mesh buildItemRects(float sideOffsets, boolean endMesh) {
+        public static void buildItemRects(float sideOffsets) {
 
             Vector3 tmp = new Vector3(0,0,-1);
 
@@ -163,8 +164,6 @@ public class ItemModelBuilder {
             bottomRight1.setNor(tmp.cpy());
 
             builder.rect(topLeft1, topRight1, bottomRight1, bottomLeft1);
-            if (endMesh) return builder.end();
-            return null;
         }
 
     }

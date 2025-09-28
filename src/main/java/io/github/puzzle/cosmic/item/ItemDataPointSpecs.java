@@ -14,8 +14,12 @@ import java.util.List;
 public class ItemDataPointSpecs {
 
     public static final TaggedDataPointSpec<List<PairDataPoint<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint>>> TEXTURE_DICT;
+
+    @Deprecated
     public static final TaggedDataPointSpec<Integer> TEXTURE_INDEX;
+    @Deprecated
     public static final TaggedDataPointSpec<IItem.ItemModelType> MODEL_TYPE;
+    @Deprecated
     public static final TaggedDataPointSpec<Identifier> TEXTURE_LOCATION;
 
     static {

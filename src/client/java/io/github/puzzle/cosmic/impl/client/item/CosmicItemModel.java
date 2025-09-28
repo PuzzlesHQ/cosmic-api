@@ -23,8 +23,10 @@ import finalforeach.cosmicreach.world.Sky;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.client.model.ICosmicItemModel;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
+import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
 import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.impl.data.point.single.EnumDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.PairDataPoint;
@@ -34,7 +36,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.Function;
 
 import static finalforeach.cosmicreach.rendering.items.ItemRenderer.registerItemModelCreator;
@@ -45,7 +49,6 @@ public class CosmicItemModel implements ICosmicItemModel {
     static HashMap<String, Texture> ITEM_TEXTURE_CACHE = new HashMap<>();
     static HashMap<String, Mesh> ITEM_MESH_CACHE = new HashMap<>();
     static HashMap<String, Pair<String, String>> INDEX_CACHE = new HashMap<>();
-    static Mesh _2D_MESH;
 
     GameShader program = new MeshData(ItemShader.DEFAULT_ITEM_SHADER, RenderOrder.FULLY_TRANSPARENT).getShader();
 
@@ -67,47 +70,19 @@ public class CosmicItemModel implements ICosmicItemModel {
         IDataPointManifest manifest = item.getPointManifest();
         this.item = item;
 
-        boolean isOld = false;
-        if (manifest.has(ItemDataPointSpecs.TEXTURE_LOCATION) && manifest.has(ItemDataPointSpecs.MODEL_TYPE)) {
-            Identifier location = manifest.get(ItemDataPointSpecs.TEXTURE_LOCATION).cast(Identifier.class).getValue();
-            location = location.getName().startsWith("textures/items/") ? location : Identifier.of(location.getNamespace(), "textures/items/" + location.getName());
-            IItem.ItemModelType modelType = manifest.get(ItemDataPointSpecs.MODEL_TYPE).getValue();
-
-
-            if (!ITEM_MESH_CACHE.containsKey(item.getIdentifier() + "_" + location + "_" + modelType + "_model")){
-                Texture localTex;
-
-                if (ITEM_TEXTURE_CACHE.containsKey(item.getIdentifier() + "_" + location + "_texture")) {
-                    localTex = ITEM_TEXTURE_CACHE.get(item.getIdentifier() + "_" + location + "_texture");
-                } else localTex = ItemModelBuilder.flip(IndependentAssetLoader.loadResource(location, Texture.class));
-
-                Mesh m = null;
-                switch (modelType) {
-                    case ITEM_MODEL_2D -> {
-                        if (_2D_MESH != null) m = _2D_MESH;
-                        else m = _2D_MESH = ItemModelBuilder.build2DMesh();
-                    }
-                    case ITEM_MODEL_3D -> m = ItemModelBuilder.build2_5DMesh(localTex);
-                }
-                ITEM_MESH_CACHE.put(item.getIdentifier() + "_" + location + "_" + modelType + "_model", m);
-                ITEM_TEXTURE_CACHE.put(item.getIdentifier() + "_" + location + "_texture", localTex);
-                INDEX_CACHE.put(item.getIdentifier() + "_0", new ImmutablePair<>(
-                        item.getIdentifier() + "_" + location + "_" + modelType + "_model",
-                        item.getIdentifier() + "_" + location + "_texture"
-                ));
-                isOld = true;
-            }
-        }
+        migrate(item);
 
         if (item.getPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
-            int index = isOld ? 1 : 0;
+            int index = 0;
             for (PairDataPoint<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint> pairAttribute : item.getPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue()) {
                 Pair<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint> pair = pairAttribute.getValue();
                 Identifier location = pair.getRight().getValue();
                 location = location.getName().startsWith("textures/items/") ? location : Identifier.of(location.getNamespace(), "textures/items/" + location.getName());
                 IItem.ItemModelType modelType = pair.getLeft().getValue();
 
-                if (!ITEM_MESH_CACHE.containsKey(item.getIdentifier() + "_" + location + "_" + modelType + "_model")) {
+                String modelId = item.getIdentifier() + "_" + location + "_" + modelType + "_model";
+                String textureId = item.getIdentifier() + "_" + location + "_texture";
+                if (!ITEM_MESH_CACHE.containsKey(modelId)) {
                     Texture localTex;
 
                     if (ITEM_TEXTURE_CACHE.containsKey(item.getIdentifier() + "_" + location + "_texture")) {
@@ -117,23 +92,43 @@ public class CosmicItemModel implements ICosmicItemModel {
 
                     Mesh m = null;
                     switch (modelType) {
-                        case ITEM_MODEL_2D -> {
-                            if (_2D_MESH != null) m = _2D_MESH;
-                            else _2D_MESH = ItemModelBuilder.build2DMesh();
-                        }
+                        case ITEM_MODEL_2D -> m = ItemModelBuilder.build2DMesh();
                         case ITEM_MODEL_3D -> m = ItemModelBuilder.build2_5DMesh(localTex);
                     }
 
-                    ITEM_MESH_CACHE.put(item.getIdentifier() + "_" + location + "_" + modelType + "_model", m);
-                    ITEM_TEXTURE_CACHE.put(item.getIdentifier() + "_" + location + "_texture", localTex);
-                    INDEX_CACHE.put(item.getIdentifier() + "_" + index, new ImmutablePair<>(
-                            item.getIdentifier() + "_" + location + "_" + modelType + "_model",
-                            item.getIdentifier() + "_" + location + "_texture"
-                    ));
-                    index++;
+                    ITEM_MESH_CACHE.put(modelId, m);
+                    ITEM_TEXTURE_CACHE.put(textureId, localTex);
                 }
+                INDEX_CACHE.put(item.getIdentifier() + "_" + index, new ImmutablePair<>(
+                        modelId,
+                        textureId
+                ));
+                index++;
             }
         }
+    }
+
+    private static void migrate(IItem item) {
+        IDataPointManifest manifest = item.getPointManifest();
+        if (manifest.has(ItemDataPointSpecs.TEXTURE_LOCATION) && manifest.has(ItemDataPointSpecs.MODEL_TYPE)) {
+            Identifier modelId = manifest.get(ItemDataPointSpecs.TEXTURE_LOCATION).getValue();
+            IItem.ItemModelType type = manifest.get(ItemDataPointSpecs.MODEL_TYPE).getValue();
+
+            List<PairDataPoint<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint>> data;
+            ITaggedDataPoint<List<PairDataPoint<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint>>> point;
+            if (manifest.has(ItemDataPointSpecs.TEXTURE_DICT))
+                point = manifest.get(ItemDataPointSpecs.TEXTURE_DICT);
+            else
+                point = ItemDataPointSpecs.TEXTURE_DICT.create(new ArrayList<>());
+
+            data = point.getValue();
+            data.addFirst(new PairDataPoint<>(new EnumDataPoint<>(type), new IdentifierDataPoint(modelId)));
+            point.setValue(data);
+            manifest.put(point);
+            manifest.remove(ItemDataPointSpecs.TEXTURE_LOCATION.getName());
+            manifest.remove(ItemDataPointSpecs.MODEL_TYPE.getName());
+        }
+
     }
 
     static final Color tintColor = new Color();
@@ -249,6 +244,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     public void renderAsEntity(Vector3 pos, ItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
         tmpMatrix.translate(0.5F, 0.2F, 0.5F);
         tmpMatrix.scale(0.7f, 0.7f, 0.7f);
+
         renderGeneric(pos, stack, entityCam, tmpMatrix, false);
     }
 

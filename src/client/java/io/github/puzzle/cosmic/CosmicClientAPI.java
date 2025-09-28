@@ -54,11 +54,4 @@ public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
         Threads.runOnMainThread(ItemShader::initItemShader);
     }
 
-//    @SubscribeEvent
-//    public void onEvent(OnRegisterEvent event) {
-//        if (event.obj instanceof Item item) {
-//            if (!CosmicItemModel.hasItemModel(item))
-//                CosmicItemModel.registerItemModel(item);
-//        }
-//    }
 }

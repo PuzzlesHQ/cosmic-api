@@ -16,8 +16,7 @@ public class BlockWrench extends AbstractCosmicItem {
 
     public BlockWrench() {
         super(Identifier.of("puzzle-loader", "block_wrench"));
-        manifest.put(ItemDataPointSpecs.MODEL_TYPE.create(ItemModelType.ITEM_MODEL_3D));
-        manifest.put(ItemDataPointSpecs.TEXTURE_LOCATION.create(Identifier.of(MOD_ID, "block_wrench.png")));
+        addTexture(ItemModelType.ITEM_MODEL_3D, Identifier.of(MOD_ID, "block_wrench.png"));
     }
 
     @Override
