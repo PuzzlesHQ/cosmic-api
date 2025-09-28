@@ -1,6 +1,7 @@
 package io.github.puzzle.cosmic.api.event;
 
-import finalforeach.cosmicreach.blockentities.BlockEntity;
+
+import finalforeach.cosmicreach.blocks.blockentities.BlockEntity;
 
 /**
  *

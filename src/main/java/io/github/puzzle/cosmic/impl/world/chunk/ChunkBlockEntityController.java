@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.impl.world.chunk;
 
-import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockState;
+import finalforeach.cosmicreach.blocks.blockentities.BlockEntity;
 import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.world.IChunk;
 

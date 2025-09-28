@@ -1,8 +1,8 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
-import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
+import finalforeach.cosmicreach.blocks.blockentities.BlockEntity;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
@@ -67,7 +67,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
             BlockPosition offs = getOffsetBlockPos(this.getZone(), direction);
             if (offs == null) continue;
 
-            IBlockEntity entity = offs.getBlockEntity();
+            IBlockEntity entity = (IBlockEntity) offs.getBlockEntity();
             if (event.getSourcePosition().equals((BlockPosition) (Object) this)) continue;
 
             if (entity != null)
@@ -82,7 +82,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
         BlockPosition offs = getOffsetBlockPos(this.getZone(), direction);
         if (offs == null) return;
 
-        IBlockEntity entity = offs.getBlockEntity();
+        IBlockEntity entity = (IBlockEntity) offs.getBlockEntity();
 
         if (entity != null)
             entity.updateNeighbors(event);

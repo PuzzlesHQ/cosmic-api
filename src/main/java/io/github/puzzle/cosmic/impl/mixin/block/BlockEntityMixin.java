@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
-import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
+import finalforeach.cosmicreach.blocks.blockentities.BlockEntity;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.constants.Direction;

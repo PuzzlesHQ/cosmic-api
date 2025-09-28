@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.blockentity;
 
-import finalforeach.cosmicreach.blockentities.BlockEntity;
-import finalforeach.cosmicreach.blockentities.BlockEntityCreator;
+import finalforeach.cosmicreach.blocks.blockentities.BlockEntity;
+import finalforeach.cosmicreach.blocks.blockentities.BlockEntityCreator;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;

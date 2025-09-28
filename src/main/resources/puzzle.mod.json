@@ -23,7 +23,8 @@
     ]
   },
   "depends": {
-    "puzzle-loader-core": ">=1.0.9-alpha"
+    "puzzle-loader-core": ">=1.0.9-alpha",
+    "puzzle-loader-cosmic": ">=1.4.1-alpha"
   },
   "allowedSides": {
     "client": true,

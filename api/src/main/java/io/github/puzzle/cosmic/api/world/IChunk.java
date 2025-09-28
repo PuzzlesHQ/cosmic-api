@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.api.world;
 
-import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockState;
+import finalforeach.cosmicreach.blocks.blockentities.BlockEntity;
 import finalforeach.cosmicreach.rendering.IChunkMeshGroup;
 import finalforeach.cosmicreach.world.Zone;
 
