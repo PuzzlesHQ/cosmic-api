@@ -27,8 +27,6 @@ public class ItemDataPointSpecs {
         TEXTURE_INDEX = new TaggedDataPointSpec<>("texture_index", IntegerDataPoint::new);
         TEXTURE_LOCATION = new TaggedDataPointSpec<>("texture_location", IdentifierDataPoint::new);
         MODEL_TYPE = new TaggedDataPointSpec<>("model_type", () -> new EnumDataPoint<>(IItem.ItemModelType.class));
-
-        IItem.ItemModelType.class.getEnumConstants();
     }
 
 }
