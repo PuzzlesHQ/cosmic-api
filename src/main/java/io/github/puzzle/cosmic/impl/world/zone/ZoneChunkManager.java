@@ -7,7 +7,7 @@ import io.github.puzzle.cosmic.api.world.IZone;
 
 public class ZoneChunkManager implements IZone.IChunkManager {
 
-    Zone puzzleLoader$zone;
+    private transient final Zone puzzleLoader$zone;
 
     public ZoneChunkManager(Zone zone) {
         this.puzzleLoader$zone = zone;

@@ -17,6 +17,14 @@ public class ZoneMixin implements IZone {
     @Unique
     private final transient Zone puzzleLoader$zone = (Zone)(Object)this;
 
+    @Unique
+    private final transient IChunkManager puzzleLoader$chunkManager = new ZoneChunkManager(puzzleLoader$zone);
+
+    @Unique
+    private final transient IEntityManager puzzleLoader$entityManager = new ZoneEntityManager(puzzleLoader$zone);
+    @Unique
+    private final transient IPlayerManager puzzleLoader$playerManager = new ZonePlayerManager(puzzleLoader$zone);
+
     @Override
     public IChunkManager getChunkManager() {
         return puzzleLoader$chunkManager;
@@ -31,14 +39,6 @@ public class ZoneMixin implements IZone {
     public IPlayerManager getPlayerManager() {
         return puzzleLoader$playerManager;
     }
-
-    @Unique
-    private final transient IChunkManager puzzleLoader$chunkManager = new ZoneChunkManager(puzzleLoader$zone);
-
-    @Unique
-    private final transient IEntityManager puzzleLoader$entityManager = new ZoneEntityManager(puzzleLoader$zone);
-    @Unique
-    private final transient IPlayerManager puzzleLoader$playerManager = new ZonePlayerManager(puzzleLoader$zone);
 
     @Override
     public String getStringID() {

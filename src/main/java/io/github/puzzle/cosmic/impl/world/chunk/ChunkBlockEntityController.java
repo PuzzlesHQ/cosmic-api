@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 
 public class ChunkBlockEntityController implements IChunk.IBlockEntityController {
 
-    Chunk puzzleLoader$chunk;
+    private transient final Chunk puzzleLoader$chunk;
 
     public ChunkBlockEntityController(Chunk chunk) {
         this.puzzleLoader$chunk = chunk;

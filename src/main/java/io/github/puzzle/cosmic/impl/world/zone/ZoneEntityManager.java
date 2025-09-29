@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 
 public class ZoneEntityManager implements IZone.IEntityManager {
 
-    Zone puzzleLoader$zone;
+    private transient final Zone puzzleLoader$zone;
 
     public ZoneEntityManager(Zone zone) {
         this.puzzleLoader$zone = zone;

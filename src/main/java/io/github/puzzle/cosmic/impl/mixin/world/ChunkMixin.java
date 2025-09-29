@@ -28,12 +28,12 @@ public abstract class ChunkMixin implements IChunk {
 
     @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/blocks/BlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState blockState, int x, int y, int z, CallbackInfo ci) {
-        ((IBlockPosition)puzzleLoader$tmp.set(puzzleLoader$chunk, x, y, z)).updateNeighbors(new BlockUpdateEvent());
+        puzzleLoader$tmp.set(puzzleLoader$chunk, x, y, z).updateNeighbors(new BlockUpdateEvent());
     }
 
     @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/savelib/blocks/IBlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(IBlockState blockState, int x, int y, int z, CallbackInfo ci) {
-        ((IBlockPosition)puzzleLoader$tmp.set(puzzleLoader$chunk, x, y, z)).updateNeighbors(new BlockUpdateEvent());
+        puzzleLoader$tmp.set(puzzleLoader$chunk, x, y, z).updateNeighbors(new BlockUpdateEvent());
     }
 
     @Unique
@@ -42,5 +42,13 @@ public abstract class ChunkMixin implements IChunk {
     @Unique
     private final transient IBlockEntityController puzzleLoader$blockEntityController = new ChunkBlockEntityController(puzzleLoader$chunk);
 
+    @Override
+    public IBlockEntityController getBlockEntityController() {
+        return puzzleLoader$blockEntityController;
+    }
 
+    @Override
+    public IMeshingController getMeshingController() {
+        return puzzleLoader$meshingController;
+    }
 }

@@ -7,7 +7,7 @@ import io.github.puzzle.cosmic.api.world.IChunk;
 
 public class ChunkMeshingController implements IChunk.IMeshingController {
 
-    Chunk puzzleLoader$chunk;
+    private transient final Chunk puzzleLoader$chunk;
 
     public ChunkMeshingController(Chunk chunk) {
         this.puzzleLoader$chunk = chunk;
