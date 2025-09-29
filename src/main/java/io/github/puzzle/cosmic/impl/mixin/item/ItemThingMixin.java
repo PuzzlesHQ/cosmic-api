@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ItemThingMixin implements IItem {
 
     @Unique
-    boolean cosmicAPI$isModded;
+    transient boolean cosmicAPI$isModded;
 
     @Override
     public boolean isModded() {

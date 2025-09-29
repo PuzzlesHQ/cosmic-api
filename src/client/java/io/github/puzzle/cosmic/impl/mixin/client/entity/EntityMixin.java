@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EntityMixin implements IEntity {
 
     @Unique
-    Entity puzzleLoader$entity = (Entity) (Object) this;
+    private transient final Entity puzzleLoader$entity = (Entity) (Object) this;
 
     @Shadow(remap = false)
     @Final

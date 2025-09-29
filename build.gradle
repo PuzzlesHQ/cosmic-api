@@ -64,8 +64,6 @@ jar {
 }
 
 dependencies {
-    // required for jitpack for some reason
-    mappingsConstants("org.parchmentmc.data:parchment-1.20.2:2023.10.08@zip")
     cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
 }
 

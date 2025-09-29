@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 
 public class ZonePlayerManager implements IZone.IPlayerManager {
 
-    Zone puzzleLoader$zone;
+    private transient final Zone puzzleLoader$zone;
 
     public ZonePlayerManager(Zone zone) {
         this.puzzleLoader$zone = zone;
