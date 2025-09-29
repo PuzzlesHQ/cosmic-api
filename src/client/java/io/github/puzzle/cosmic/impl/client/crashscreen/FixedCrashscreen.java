@@ -80,7 +80,7 @@ public class FixedCrashscreen {
         String osName = System.getProperty("os.name").toLowerCase();
         try {
             if (osName.contains("windows")) {
-                builders.add(new ProcessBuilder("wmic", "cpu", "get", "name"));
+                builders.add(new ProcessBuilder("powershell", "Get-WmiObject", "Win32_Processor", "|", "Select-Object", "-Property" , "Name"));
             } else if (osName.contains("mac")) {
                 builders.add(new ProcessBuilder("sysctl", "-a", "machdep.cpu.brand_string"));
             } else {
@@ -91,6 +91,7 @@ public class FixedCrashscreen {
             String output = new String(last.getInputStream().readAllBytes()).replace("\n", "");
             if (osName.contains("windows")) {
                 output = output.replace("Name", "").trim();
+                output = output.replace("----", "").trim();
             }
             infoItems.put("CPU model", output);
         } catch (Exception commandException) {
@@ -111,7 +112,7 @@ public class FixedCrashscreen {
         infoItems.put("RAM available", "Unknown");
         try {
             if (osName.contains("windows")) {
-                builder = new ProcessBuilder("wmic", "ComputerSystem", "get", "TotalPhysicalMemory", "/VALUE");
+                builder = new ProcessBuilder("powershell", "[Math]::Round((Get-WmiObject", "Win32_Computersystem", "-ComputerName", "localhost).TotalPhysicalMemory)");
             } else if (osName.contains("mac")) {
                 builder = new ProcessBuilder("sysctl", "-n", "hw.memsize");
             } else {
@@ -235,12 +236,12 @@ public class FixedCrashscreen {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         try {
             frame.setIconImages(List.of(
-                    ImageIO.read(Objects.requireNonNull(Piece.classLoader.getResourceAsStream("icons/logox16.png"))),
-                    ImageIO.read(Objects.requireNonNull(Piece.classLoader.getResourceAsStream("icons/logox24.png"))),
-                    ImageIO.read(Objects.requireNonNull(Piece.classLoader.getResourceAsStream("icons/logox32.png"))),
-                    ImageIO.read(Objects.requireNonNull(Piece.classLoader.getResourceAsStream("icons/logox64.png"))),
-                    ImageIO.read(Objects.requireNonNull(Piece.classLoader.getResourceAsStream("icons/logox128.png"))),
-                    ImageIO.read(Objects.requireNonNull(Piece.classLoader.getResourceAsStream("icons/logox256.png")
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox16.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox24.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox32.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox64.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox128.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox256.png")
                     ))));
         } catch (IOException e) {
             throw new RuntimeException(e);
