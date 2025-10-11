@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import dev.puzzleshq.puzzleloader.loader.util.ReflectionUtil;
+import finalforeach.cosmicreach.entities.ItemEntity;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.items.HeldItemRenderParams;
@@ -30,7 +31,7 @@ public class CosmicItemModelWrapper extends ItemModel implements ICosmicItemMode
     }
 
     @Override
-    public void render(Vector3 vector3, Camera camera, Matrix4 matrix4, boolean useAmbientLighting, boolean applyFog) {
+    public void render(Vector3 vector3, Camera camera, Matrix4 matrix4, boolean useAmbientLighting, boolean applyFog, ItemStack itemStack) {
         renderInSlot(vector3, null, camera, matrix4, useAmbientLighting);
     }
 
@@ -63,7 +64,7 @@ public class CosmicItemModelWrapper extends ItemModel implements ICosmicItemMode
     }
 
     @Override
-    public void renderAsItemEntity(Vector3 vector3, Camera camera, Matrix4 matrix4) {
+    public void renderAsItemEntity(Vector3 vector3, Camera camera, Matrix4 matrix4, ItemEntity itemEntity) {
         renderAsEntity(vector3, null, camera, matrix4);
     }
 
