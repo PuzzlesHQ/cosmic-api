@@ -54,9 +54,6 @@ repositories {
         url "https://jitpack.io"
     }
     maven {
-        url "https://maven.bawnorton.com/releases"
-    }
-    maven {
         name = 'ParchmentMC'
         url = 'https://maven.parchmentmc.org'
     }
