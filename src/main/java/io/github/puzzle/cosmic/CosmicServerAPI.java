@@ -28,9 +28,8 @@ public class CosmicServerAPI implements ModInit, PostModInit {
 
     @Override
     public void onPostInit() {
-//        AbstractCosmicItem.register(new CheckBoard());
-//        AbstractCosmicItem.register(new NullStick());
-//        AbstractCosmicItem.register(new BlockWrench());
-//        AbstractCosmicItem.register(new BlockWrench());
+        AbstractCosmicItem.register(new CheckBoard());
+        AbstractCosmicItem.register(new NullStick());
+        AbstractCosmicItem.register(new BlockWrench());
     }
 }

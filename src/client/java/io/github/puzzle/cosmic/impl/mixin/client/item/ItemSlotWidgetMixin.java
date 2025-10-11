@@ -24,7 +24,10 @@ public class ItemSlotWidgetMixin {
     @Unique
     private static final Matrix4 cosmicAPI$identMat4 = new Matrix4();
 
-    @Inject(remap = false, method = "drawItem", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/items/ItemRenderer;drawItem(Lcom/badlogic/gdx/graphics/Camera;Lfinalforeach/cosmicreach/items/Item;)V", shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(remap = false, method = "drawItem",
+            at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/items/ItemRenderer;drawItem(Lcom/badlogic/gdx/graphics/Camera;Lfinalforeach/cosmicreach/items/Item;Lfinalforeach/cosmicreach/items/ItemStack;)V"
+                    , shift = At.Shift.BEFORE),
+            cancellable = true)
     private void drawItem(Viewport itemViewport, CallbackInfo ci, @Local Camera itemCam) {
         ItemModel model = ItemRenderer.getModel(itemStack.getItem(), true);
         if (model instanceof CosmicItemModelWrapper itemModel) {
@@ -32,7 +35,7 @@ public class ItemSlotWidgetMixin {
             ci.cancel();
             return;
         }
-        model.render(null, itemCam, cosmicAPI$identMat4, false, false);
+        model.render(null, itemCam, cosmicAPI$identMat4, false, false, itemStack);
     }
 
 }
