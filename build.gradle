@@ -8,6 +8,7 @@ plugins {
 if (System.getenv("JITPACK") != "true"){
     if (version == "unspecified") {
         version = fallback_version
+        archivesBaseName = p_id
     }
 }
 
