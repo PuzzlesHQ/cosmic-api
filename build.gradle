@@ -5,9 +5,9 @@ plugins {
     id 'com.gradleup.shadow'
 }
 
-//if (version == null) {
-//    version = fallback_version
-//}
+if (version == "unspecified") {
+    version = fallback_version
+}
 
 loom {
     splitEnvironmentSourceSets()
