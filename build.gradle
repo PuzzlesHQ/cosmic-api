@@ -67,7 +67,6 @@ jar {
 
 dependencies {
     cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
-    implementation 'com.github.PuzzlesHQ:cosmic-api:dd470fefad'
 }
 
 processResources() {
