@@ -6,9 +6,11 @@ plugins {
 }
 
 if (System.getenv("JITPACK") != "true"){
+    def ref = System.getenv("GITHUB_REF")
+    version = ((ref == null) ? "refs/tags/unspecified" : ref).replaceAll("refs/tags/", "")
+    archivesBaseName = p_id
     if (version == "unspecified") {
         version = fallback_version
-        archivesBaseName = p_id
     }
 }
 
