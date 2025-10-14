@@ -1,0 +1,28 @@
+name: Publish to CRMM
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-to-crmm:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Extract game version
+        run: echo "GAME_VERSION=${GITHUB_EVENT_RELEASE_TAG#*-}" >> $GITHUB_ENV
+        env:
+          GITHUB_EVENT_RELEASE_TAG: ${{ github.event.release.tag_name }}
+
+
+      - name: Upload version to CRMM
+        uses: PuzzlesHQ/Puzzles-Workflows/.github/workflows/upload-version.yml@main
+        with:
+          project-slug: "RCSwbKUrOaudoth8pg"
+          title: ${{ github.event.release.name }}
+          changelog: ${{ github.event.release.body }}
+          version: ${{ github.event.release.tag_name }}
+          loaders: "puzzle_loader"
+          game-versions: ${{ env.GAME_VERSION }}
+          primary-file: "build/libs/cosmic-api-${{ github.event.release.tag_name }}-merged-bundle.jar"
