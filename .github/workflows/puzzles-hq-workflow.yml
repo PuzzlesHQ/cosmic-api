@@ -21,6 +21,7 @@ jobs:
     needs: prepare
     name: Upload version to CRMM
     uses: PuzzlesHQ/Puzzles-Workflows/.github/workflows/upload-version.yml@main
+    secrets: inherit
     with:
       project-slug: "RCSwbKUrOaudoth8pg"
       title: ${{ github.event.release.name }}
