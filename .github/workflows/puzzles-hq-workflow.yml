@@ -5,24 +5,27 @@ on:
     types: [published]
 
 jobs:
-  publish-to-crmm:
+  prepare:
     runs-on: ubuntu-latest
-
+    outputs:
+      game-version: ${{ steps.extract.outputs.game-version }}
+    
     steps:
-
-      - name: Extract game version
-        run: echo "GAME_VERSION=${GITHUB_EVENT_RELEASE_TAG#*-}" >> $GITHUB_ENV
+      - id: extract
+        name: Extract game version
+        run: echo "game-version=${GITHUB_EVENT_RELEASE_TAG#*-}" >> $GITHUB_OUTPUT
         env:
           GITHUB_EVENT_RELEASE_TAG: ${{ github.event.release.tag_name }}
 
-
-      - name: Upload version to CRMM
-        uses: PuzzlesHQ/Puzzles-Workflows/.github/workflows/upload-version.yml@main
-        with:
-          project-slug: "RCSwbKUrOaudoth8pg"
-          title: ${{ github.event.release.name }}
-          changelog: ${{ github.event.release.body }}
-          version: ${{ github.event.release.tag_name }}
-          loaders: "puzzle_loader"
-          game-versions: ${{ env.GAME_VERSION }}
-          primary-file: "build/libs/cosmic-api-${{ github.event.release.tag_name }}-merged-bundle.jar"
+  publish-to-crmm:
+    needs: prepare
+    name: Upload version to CRMM
+    uses: PuzzlesHQ/Puzzles-Workflows/.github/workflows/upload-version.yml@main
+    with:
+      project-slug: "RCSwbKUrOaudoth8pg"
+      title: ${{ github.event.release.name }}
+      changelog: ${{ github.event.release.body }}
+      version: ${{ github.event.release.tag_name }}
+      loaders: "puzzle_loader"
+      game-versions: ${{ needs.prepare.outputs.game-version }}
+      primary-file: "build/libs/cosmic-api-${{ github.event.release.tag_name }}-merged-bundle.jar"
