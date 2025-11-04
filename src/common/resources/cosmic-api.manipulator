@@ -1,3 +1,6 @@
 public method finalforeach/cosmicreach/entities/player/PlayerEntity updateSkin ()V
 public field finalforeach/cosmicreach/rendering/items/ItemRenderer referenceMap
 public field finalforeach/cosmicreach/rendering/items/ItemRenderer modelCreators
+public class finalforeach/cosmicreach/items/recipes/PairRecipeRegistry
+public class finalforeach/cosmicreach/items/recipes/PairRecipe
+public field finalforeach/cosmicreach/items/recipes/PairRecipeRegistry allPairRecipes

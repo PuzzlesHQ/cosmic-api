@@ -1,8 +1,7 @@
 plugins {
     id "java"
-    id "jigsaw"
+    id 'jigsaw-cosmic-reach'
     id 'maven-publish'
-    id 'com.gradleup.shadow'
 }
 
 if (System.getenv("JITPACK") != "true"){
@@ -14,31 +13,24 @@ if (System.getenv("JITPACK") != "true"){
     }
 }
 
-loom {
-    splitEnvironmentSourceSets()
-    mods {
-        "cosmic-api" { //TODO: Fix
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
-    }
-    accessWidenerPath = file("src/main/resources/cosmic-api.manipulator")
+jigsawGame {
+    splitSourceSets()
 }
 
 sourceSets {
-    main {
+    common {
         java {
-            srcDirs "src/main/java"
-            srcDirs "api/src/main/java"
+            srcDirs "src/common/java"
+            srcDirs "api/src/common/java"
         }
         resources {
-            srcDirs "src/main/resources"
-            srcDirs "api/src/main/resources"
+            srcDirs "src/common/resources"
+            srcDirs "api/src/common/resources"
         }
     }
     client {
         java {
-            srcDirs "src/main/java"
+            srcDirs "src/client/java"
         }
     }
 	//client {
@@ -53,6 +45,15 @@ sourceSets {
 	//}
 
 }
+
+jigsawAccess {
+    addManipulators(file("$projectDir/src/common/resources/cosmic-api.manipulator"))
+}
+
+jigsawInject {
+    setModJson(file("$projectDir/src/common/resources/puzzle.mod.json"))
+}
+
 repositories {
     mavenCentral()
     maven {
@@ -69,7 +70,12 @@ jar {
 }
 
 dependencies {
-    cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
+    clientCompileOnly "org.jetbrains:annotations:$jetbrains_annotations_version"
+    commonCompileOnly "org.jetbrains:annotations:$jetbrains_annotations_version"
+
+    puzzleLoader("dev.puzzleshq:puzzle-loader-core:${puzzle_core_version}")
+    puzzleLoader("dev.puzzleshq:puzzle-loader-cosmic:${puzzle_cosmic_version}")
+    cosmicReach("finalforeach:cosmic-reach:${cosmic_reach_version}")
 }
 
 processResources() {

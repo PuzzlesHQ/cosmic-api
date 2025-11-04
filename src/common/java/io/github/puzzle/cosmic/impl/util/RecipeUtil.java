@@ -4,7 +4,7 @@ import dev.puzzleshq.puzzleloader.loader.util.ReflectionUtil;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.recipes.CraftingRecipe;
 import finalforeach.cosmicreach.items.recipes.CraftingRecipes;
-import finalforeach.cosmicreach.items.recipes.FurnaceRecipe;
+import finalforeach.cosmicreach.items.recipes.PairRecipeRegistry;
 import finalforeach.cosmicreach.util.Identifier;
 
 import java.lang.reflect.InvocationTargetException;

@@ -45,3 +45,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 /.idea
+/worlds/server-world-1/worldInfo.json
+/worlds/server-world-1/zones/base/earth/zoneInfo.json

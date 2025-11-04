@@ -8,12 +8,18 @@ buildscript {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.puzzleshq.dev/releases/'
+        }
         mavenCentral()
         gradlePluginPortal()
+        mavenLocal()
     }
     dependencies {
-        classpath "com.gradleup.shadow:shadow-gradle-plugin:8.3.3"
-        classpath "com.github.PuzzlesHQ.jigsaw:jigsaw:$jigsaw_gradle_version"
+        classpath ("dev.puzzleshq:jigsaw-suite:$puzzle_jigsaw_suite_version") {
+            changing: true
+        }
     }
 }
 
