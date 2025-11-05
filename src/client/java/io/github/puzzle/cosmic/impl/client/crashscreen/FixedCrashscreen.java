@@ -4,22 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Files;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
-import dev.puzzleshq.puzzleloader.loader.launch.Piece;
-import dev.puzzleshq.puzzleloader.loader.util.RawAssetLoader;
-import dev.puzzleshq.puzzleloader.loader.util.ResourceLocation;
 import finalforeach.cosmicreach.BlockGame;
 import finalforeach.cosmicreach.RuntimeInfo;
 import finalforeach.cosmicreach.io.SaveLocation;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.util.logging.AnsiColours;
-import org.lwjgl.system.windows.User32;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.tools.Tool;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -236,12 +230,12 @@ public class FixedCrashscreen {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         try {
             frame.setIconImages(List.of(
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox16.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox24.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox32.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox64.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox128.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("icons/logox256.png")
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox16.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox24.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox32.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox64.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox128.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox256.png")
                     ))));
         } catch (IOException e) {
             throw new RuntimeException(e);

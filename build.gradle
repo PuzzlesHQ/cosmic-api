@@ -28,11 +28,6 @@ sourceSets {
             srcDirs "api/src/common/resources"
         }
     }
-    client {
-        java {
-            srcDirs "src/client/java"
-        }
-    }
 	//client {
 	//    java {
     //        srcDirs "src/client/java"
@@ -78,27 +73,48 @@ dependencies {
     cosmicReach("finalforeach:cosmic-reach:${cosmic_reach_version}")
 }
 
-processResources() {
+//processResources() {
+//    duplicatesStrategy = 'EXCLUDE'
+//}
+
+//processResources {
+//    // Locations of where to inject the properties
+//    def resourceTargets = [ "puzzle.mod.json" ]
+//
+//    // Left item is the name in the target, right is the varuable name
+//    def replaceProperties = [
+//            "mod_version"     : version.toString() == "unspecified" ? "0.0.0" : version,
+//            "mod_desc"       :  desc,
+//            "version"       :  (project.version.toString() == "unspecified" ? "0.0.0" : project.version).toString().split("-")[0],
+////            "cr_version"          : cosmic_reach_version,
+//    ]
+//
+//
+//    inputs.properties replaceProperties
+//    replaceProperties.put "project", project
+//    filesMatching(resourceTargets) {
+//        expand replaceProperties
+//    }
+//}
+
+
+
+processCommonResources {
     duplicatesStrategy = 'EXCLUDE'
-}
 
-processResources {
-    // Locations of where to inject the properties
-    def resourceTargets = [ "puzzle.mod.json" ]
+    def projectProperties = [
+            "p_name": p_name,
+            "p_version": ((String)version).contains(".") ? version : "0.0.0",
+            "p_desc": p_desc,
 
-    // Left item is the name in the target, right is the varuable name
-    def replaceProperties = [
-            "mod_version"     : version.toString() == "unspecified" ? "0.0.0" : version,
-            "mod_desc"       :  desc,
-            "version"       :  (project.version.toString() == "unspecified" ? "0.0.0" : project.version).toString().split("-")[0],
-//            "cr_version"          : cosmic_reach_version,
+            "p_id": p_id,
+            "p_group": p_group,
     ]
 
+    inputs.properties projectProperties
 
-    inputs.properties replaceProperties
-    replaceProperties.put "project", project
-    filesMatching(resourceTargets) {
-        expand replaceProperties
+    filesMatching(["puzzle.mod.json"]) {
+        expand projectProperties
     }
 }
 

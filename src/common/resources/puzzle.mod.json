@@ -1,12 +1,12 @@
 {
   "formatVersion": 3,
-  "display-name": "Cosmic API",
-  "id": "cosmic-api",
-  "version": "${version}",
-  "description": "${mod_desc}.",
+  "display-name": "${p_name}",
+  "id": "${p_id}",
+  "version": "${p_version}",
+  "description": "${p_desc}.",
   "authors": [ "Mr_Zombii", "CrabKing", "replet" ],
   "meta": {
-    "icon": "cosmic-api:icons/icon.png"
+    "icon": "${p_id}:assets/cosmic-api/icons/icon.png"
   },
   "entrypoints": {
     "postInit": [
