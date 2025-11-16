@@ -21,7 +21,6 @@ public class CosmicServerAPI implements ModInit, PostModInit {
 
     @Override
     public void onInit() {
-        RecipeUtil.registerCrusherRecipe(Item.getItem("base:medkit"), Item.getItem("base:medkit_gold"), 100);
     }
 
     @SubscribeEvent

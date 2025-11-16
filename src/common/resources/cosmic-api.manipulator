@@ -5,5 +5,6 @@ public field finalforeach/cosmicreach/rendering/items/ItemRenderer modelCreators
 public field finalforeach/cosmicreach/items/recipes/PairRecipe allPairRecipeRegisteries
 public class finalforeach/cosmicreach/items/recipes/PairRecipeRegistry
 public method finalforeach/cosmicreach/items/recipes/PairRecipeRegistry registerPairRecipe (Lfinalforeach/cosmicreach/items/Item;Lfinalforeach/cosmicreach/items/Item;I)V
+public method finalforeach/cosmicreach/items/recipes/PairRecipeRegistry registerPairRecipe (Lfinalforeach/cosmicreach/items/Item;Lfinalforeach/cosmicreach/items/Item;I)Lfinalforeach/cosmicreach/items/recipes/PairRecipe;
 
 public method finalforeach/cosmicreach/items/recipes/CraftingRecipes registerRecipe (Lfinalforeach/cosmicreach/util/Identifier;Lfinalforeach/cosmicreach/items/recipes/CraftingRecipe;)V

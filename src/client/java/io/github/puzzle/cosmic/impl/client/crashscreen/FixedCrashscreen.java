@@ -230,12 +230,11 @@ public class FixedCrashscreen {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         try {
             frame.setIconImages(List.of(
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox16.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox24.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox32.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox64.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox128.png"))),
-                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/cosmic-api/icons/logox256.png")
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/puzzle-loader-core/icons/puzzle-loader-icon-16.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/puzzle-loader-core/icons/puzzle-loader-icon-32.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/puzzle-loader-core/icons/puzzle-loader-icon-64.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/puzzle-loader-core/icons/puzzle-loader-icon-128.png"))),
+                    ImageIO.read(Objects.requireNonNull(BlockGame.class.getClassLoader().getResourceAsStream("assets/puzzle-loader-core/icons/puzzle-loader-icon-256.png")
                     ))));
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package io.github.puzzle.cosmic.impl.client.item;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import dev.puzzleshq.puzzleloader.loader.util.ReflectionUtil;
@@ -31,7 +32,7 @@ public class CosmicItemModelWrapper extends ItemModel implements ICosmicItemMode
     }
 
     @Override
-    public void render(Vector3 vector3, Camera camera, Matrix4 matrix4, boolean useAmbientLighting, boolean applyFog, ItemStack itemStack) {
+    public void render(Vector3 vector3, Camera camera, Matrix4 matrix4, boolean useAmbientLighting, boolean applyFog, ItemStack itemStack, Color color) {
         renderInSlot(vector3, null, camera, matrix4, useAmbientLighting);
     }
 
