@@ -126,7 +126,7 @@ if (System.getenv("JITPACK") == "true") {
                 artifactId = p_id
                 version = project.version
 
-                artifact source: buildMergedBundleJar, extension: 'jar'
+                artifact source: buildMergedJar, extension: 'jar'
             }
         }
     }
