@@ -17,15 +17,6 @@ jobs:
         env:
           GITHUB_EVENT_RELEASE_TAG: ${{ github.event.release.tag_name }}
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: 24
-
-      - name: Setup Gradle
-        run: .\gradlew transformJars
-
   publish-to-crmm:
     needs: prepare
     name: Publish version to CRMM
