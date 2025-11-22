@@ -23,4 +23,4 @@ buildscript {
     }
 }
 
-rootProject.name = 'Cosmic API'
+rootProject.name = 'cosmic-api'
