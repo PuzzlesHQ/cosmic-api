@@ -118,7 +118,6 @@ processCommonResources {
     }
 }
 
-if (System.getenv("JITPACK") == "true") {
     publishing {
         publications {
             maven(MavenPublication) {
@@ -126,9 +125,7 @@ if (System.getenv("JITPACK") == "true") {
                 artifactId = p_id
                 version = project.version
 
-                artifact source: buildMergedJar, extension: 'jar'
+                artifact source: buildMergedJar, extension: 'jar', classifier: ""
             }
         }
     }
-
-}
