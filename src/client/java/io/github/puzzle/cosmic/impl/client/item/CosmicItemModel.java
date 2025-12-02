@@ -32,8 +32,6 @@ import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.PairDataPoint;
 import io.github.puzzle.cosmic.item.AbstractCosmicItem;
 import io.github.puzzle.cosmic.item.ItemDataPointSpecs;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -45,7 +43,6 @@ import static finalforeach.cosmicreach.rendering.items.ItemRenderer.registerItem
 
 public class CosmicItemModel implements ICosmicItemModel {
 
-    private static final Logger log = LoggerFactory.getLogger(CosmicItemModel.class);
     static HashMap<String, Texture> ITEM_TEXTURE_CACHE = new HashMap<>();
     static HashMap<String, Mesh> ITEM_MESH_CACHE = new HashMap<>();
     static HashMap<String, Pair<String, String>> INDEX_CACHE = new HashMap<>();
