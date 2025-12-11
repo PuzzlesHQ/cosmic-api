@@ -36,6 +36,7 @@
     "util.IdentifierMixin",
     "world.ChunkMixin",
     "world.WorldMixin",
-    "world.ZoneMixin"
+    "world.ZoneMixin",
+    "singletons.GameSingletonMixin"
   ]
 }
