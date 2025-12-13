@@ -9,7 +9,7 @@ buildscript {
             url = 'https://maven.fabricmc.net/'
         }
         maven {
-            name = 'Fabric'
+            name = 'Puzzle'
             url = 'https://maven.puzzleshq.dev/releases/'
         }
         mavenCentral()

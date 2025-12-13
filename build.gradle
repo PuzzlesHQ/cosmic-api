@@ -58,6 +58,10 @@ repositories {
         name = 'ParchmentMC'
         url = 'https://maven.parchmentmc.org'
     }
+    maven {
+        name = 'Puzzle'
+        url = 'https://maven.puzzleshq.dev/releases/'
+    }
 }
 
 jar {
