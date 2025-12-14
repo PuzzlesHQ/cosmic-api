@@ -12,7 +12,9 @@
     "client.item.ItemRegisterMixin",
     "client.item.ItemSlotWidgetMixin",
     "client.entity.EntityMixin",
-    "client.crashscreen.CrashScreenMixin"
+    "client.crashscreen.CrashScreenMixin",
+    "client.ui.FontRendererMixin",
+    "client.ui.DebugInfoMixin"
   ],
   "mixins": [
     "account.AccountMixin",
