@@ -30,3 +30,7 @@ jobs:
       loaders: "puzzle_loader"
       game-versions: ${{ needs.prepare.outputs.game-version }}
       primary-file: "build/libs/cosmic-api-${{ github.event.release.tag_name }}-merged.jar"
+
+  publish-to-puzzle-maven:
+    uses: PuzzlesHQ/Puzzles-Workflows/.github/workflows/maven-puzzle-publishing.yml@main
+    secrets: inherit
