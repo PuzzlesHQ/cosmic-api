@@ -14,8 +14,6 @@ String mavenUrl = System.getenv("MAVEN_URL")
 String envRepo = System.getenv("MAVEN_REPO");
 String mavenRepo = envRepo != null ? envRepo : "releases";
 
-System.out.println(mavenUrl+ "/" +mavenRepo)
-
 jigsawGame {
     splitSourceSets()
 }
@@ -31,8 +29,8 @@ sourceSets {
             srcDirs "api/src/common/resources"
         }
     }
-	//client {
-	//    java {
+    //client {
+    //    java {
     //        srcDirs "src/client/java"
     //        srcDirs "api/src/client/java"
     //    }
@@ -40,7 +38,7 @@ sourceSets {
     //        srcDirs "src/client/resources"
     //        srcDirs "api/src/client/resources"
     //    }
-	//}
+    //}
 
 }
 
