@@ -2,6 +2,7 @@ plugins {
     id "java"
     id 'jigsaw-cosmic-reach'
     id 'maven-publish'
+    id "io.github.sgtsilvio.gradle.maven-central-publishing"
 }
 
 def ref = System.getenv("GITHUB_REF")
