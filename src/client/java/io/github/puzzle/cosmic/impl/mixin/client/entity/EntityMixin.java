@@ -29,7 +29,7 @@ public abstract class EntityMixin implements IEntity {
     @Final
     protected static Matrix4 tmpModelMatrix;
 
-    @Inject(remap = false, method = "renderModelAfterMatrixSet", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/entities/IEntityModelInstance;render(Lfinalforeach/cosmicreach/entities/Entity;Lcom/badlogic/gdx/graphics/Camera;Lcom/badlogic/gdx/math/Matrix4;Z)V", shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(remap = false, method = "renderModelAfterMatrixSet", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/entities/IEntityModelInstance;render(FLfinalforeach/cosmicreach/entities/Entity;Lcom/badlogic/gdx/graphics/Camera;Lcom/badlogic/gdx/math/Matrix4;Z)V", shift = At.Shift.BEFORE), cancellable = true)
     private void render(Camera worldCamera, boolean shouldRender, CallbackInfo ci) {
         if (puzzleLoader$entity.modelInstance instanceof ItemEntityModelInstance) {
             try {
