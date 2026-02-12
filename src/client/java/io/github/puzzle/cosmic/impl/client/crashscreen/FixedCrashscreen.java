@@ -6,8 +6,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
 import finalforeach.cosmicreach.BlockGame;
 import finalforeach.cosmicreach.RuntimeInfo;
-import finalforeach.cosmicreach.io.SaveLocation;
 import finalforeach.cosmicreach.util.Identifier;
+import finalforeach.cosmicreach.util.SaveLocation;
 import finalforeach.cosmicreach.util.logging.AnsiColours;
 
 import javax.imageio.ImageIO;

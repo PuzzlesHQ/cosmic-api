@@ -33,7 +33,7 @@ public interface PuzzleBlockState extends IBlockState {
      * Adds tags to the blockState.
      * @param tags the tags to be added.
      */
-    default void addTags(Collection<GameTag> tags) {
+    default void addTags(Collection<? extends GameTag> tags) {
         throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
     }
 
@@ -49,7 +49,7 @@ public interface PuzzleBlockState extends IBlockState {
      * Removes the tags on blockState.
      * @param tags the tags to be removed.
      */
-    default void removeTags(Collection<GameTag>... tags) {
+    default void removeTags(Collection<? extends GameTag> tags) {
         throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
     }
 

@@ -33,14 +33,13 @@ public abstract class BlockStateMixin implements PuzzleBlockState {
     }
 
     @Override
-    public void addTags(Collection<GameTag> collection) {
+    public void addTags(Collection<? extends GameTag> collection) {
         puzzleLoader$state.tags.addAll(collection);
     }
 
-    @SafeVarargs
     @Override
-    public final void removeTags(Collection<GameTag>... collection) {
-        puzzleLoader$state.tags.removeAll((Collection<?>) (Object) collection);
+    public final void removeTags(Collection<? extends GameTag> collection) {
+        puzzleLoader$state.tags.removeAll(collection);
     }
 
 }
