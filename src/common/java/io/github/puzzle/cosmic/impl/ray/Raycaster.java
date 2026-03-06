@@ -27,64 +27,66 @@ public class Raycaster {
 
         while (distance > 0) {
             iterations++;
-            currentPos.mulAdd(direction, Math.min(distance, stepSize));
-            distance -= stepSize;
+            float step = Math.min(distance, stepSize);
+            currentPos.mulAdd(direction, step);
+            distance -= step;
 
             if (hitTest.apply(currentPos)) {
                 currentPos.mulAdd(direction, -stepSize);
                 stepSize *= context.refinementFactor;
 
-                while (!hitTest.apply(currentPos)) {
+                int guard = 0;
+                while (!hitTest.apply(currentPos) && guard++ < 3000) {
                     currentPos.mulAdd(direction, stepSize);
                 }
                 break;
             }
         }
 
-        System.out.println(iterations + " iterations");
         return new RaycastHitResult(currentPos, context.start.dst(currentPos), context.zone);
     }
 
     public static class RaycastContext {
-        public Vector3 start = Vector3.Zero;
-        public Vector3 end = Vector3.Zero;
+        public Vector3 start = new Vector3();
+        public Vector3 end = new Vector3();
         public final float initialStepSize;
         public final float refinementFactor;
         public final Zone zone;
 
         public RaycastContext(Zone zone, float stepSize, float refinementFactor) {
             this.zone = zone;
+            if (stepSize < MIN_STEP_SIZE) stepSize = MIN_STEP_SIZE;
             this.initialStepSize = stepSize;
             this.refinementFactor = refinementFactor;
         }
 
         public void start(Camera camera) {
-            this.start = camera.position;
+            this.start.set(camera.position);
         }
 
         public void end(Camera camera) {
-            this.end = camera.position;
+            this.end.set(camera.position);
         }
 
         public void start(Vector3 vector3) {
-            this.start = vector3;
+            this.start.set(vector3);
         }
 
         public void end(Vector3 vector3) {
-            this.end = vector3;
+            this.end.set(vector3);
         }
 
         public void start(BlockPosition blockPosition) {
-            this.start = blockPosition.getCenterOfBlock();
+            this.start.set(blockPosition.getCenterOfBlock());
         }
 
         public void end(BlockPosition blockPosition) {
-            this.end = blockPosition.getCenterOfBlock();
+            this.end.set(blockPosition.getCenterOfBlock());
         }
 
         public void end(Vector3 direction, float distance) {
             if (this.start != null) {
-                this.end = this.start.cpy().mulAdd(direction.nor(), distance);
+                this.end.set(this.start).mulAdd(direction.nor(), distance);
             }
         }
     }
