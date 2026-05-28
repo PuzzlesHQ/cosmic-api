@@ -2,8 +2,8 @@ package io.github.puzzle.cosmic.api.world;
 
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import finalforeach.cosmicreach.entities.Entity;
-import finalforeach.cosmicreach.entities.EntityUniqueId;
+import finalforeach.cosmicreach.entities.GameEntity;
+import finalforeach.cosmicreach.entities.GameEntityUniqueId;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Chunk;
@@ -128,51 +128,51 @@ public interface IZone {
          * Adds the entity to the zone.
          * @param entity the entity to add.
          */
-        void addEntity(Entity entity);
+        void addEntity(GameEntity entity);
 
         /**
          * Gets the entity from its EntityUniqueId.
          *
          * @param id the EntityUniqueId of the entity.
-         * @return a {@link Entity}
+         * @return a {@link GameEntity}
          */
-        Entity getEntity(EntityUniqueId id);
+        GameEntity getEntity(GameEntityUniqueId id);
 
         /**
          * Checks if the zone has the entity.
          * @param entity the entity to check.
          */
-        boolean hasEntity(Entity entity);
+        boolean hasEntity(GameEntity entity);
 
         /**
          * Removes the entity.
          * @param id the EntityUniqueId of the entity to remove.
          */
-        void removeEntity(EntityUniqueId id);
+        void removeEntity(GameEntityUniqueId id);
 
         /**
          * Removes the entity.
          * @param entity the entity to be removed.
          */
-        void removeEntity(Entity entity);
+        void removeEntity(GameEntity entity);
 
         /**
          * Despawns the entity.
          * @param entity the entity to despawn.
          */
-        void despawnEntity(Entity entity);
+        void despawnEntity(GameEntity entity);
 
         /**
          * Iterates over each entity.
          * @param consumer  action to be performed.
          */
-        void forEachEntity(Consumer<Entity> consumer);
+        void forEachEntity(Consumer<GameEntity> consumer);
 
         /**
          * Gets all the entity in the zone.
-         * @return a {@link Array<Entity>} of entities.
+         * @return a {@link Array<GameEntity>} of entities.
          */
-        Array<Entity> getAllEntities();
+        Array<GameEntity> getAllEntities();
     }
 
 

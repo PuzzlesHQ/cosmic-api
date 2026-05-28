@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.impl.mixin.entity;
 
 import com.badlogic.gdx.math.Vector3;
-import finalforeach.cosmicreach.entities.Entity;
+import finalforeach.cosmicreach.entities.GameEntity;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
@@ -16,11 +16,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Internal
-@Mixin(Entity.class)
+@Mixin(GameEntity.class)
 public abstract class EntityMixin implements IEntity {
 
     @Unique
-    private final transient Entity puzzleLoader$entity = (Entity) (Object)this;
+    private final transient GameEntity puzzleLoader$entity = (GameEntity) (Object)this;
 
     @Unique
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();

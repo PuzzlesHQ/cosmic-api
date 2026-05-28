@@ -1,4 +1,4 @@
-public method finalforeach/cosmicreach/entities/player/PlayerEntity updateSkin ()V
+public method finalforeach/cosmicreach/entities/player/PlayerGameEntity updateSkin ()V
 public field finalforeach/cosmicreach/rendering/items/ItemRenderer referenceMap
 public field finalforeach/cosmicreach/rendering/items/ItemRenderer modelCreators
 

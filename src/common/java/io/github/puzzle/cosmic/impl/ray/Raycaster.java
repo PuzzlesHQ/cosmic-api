@@ -7,7 +7,7 @@ import finalforeach.cosmicreach.blocks.Block;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.blocks.blockentities.BlockEntity;
-import finalforeach.cosmicreach.entities.Entity;
+import finalforeach.cosmicreach.entities.GameEntity;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.entities.player.PlayerEntity;
 import finalforeach.cosmicreach.world.Zone;
@@ -102,15 +102,15 @@ public class Raycaster {
             this.hitDistance = hitDistance;
         }
 
-        public Entity getEntity() {
-            Array<Entity> entities = hitZone.getAllEntities();
-            for (Entity entity : entities) {
+        public GameEntity getEntity() {
+            Array<GameEntity> entities = hitZone.getAllEntities();
+            for (GameEntity entity : entities) {
                 if (entity.globalBoundingBox.contains(hitPosition) && entity.isMob() && !entity.isDead()) return entity;
             }
             return null;
         }
 
-        public Entity getPlayerEntity() {
+        public GameEntity getPlayerEntity() {
             Array<Player> players = hitZone.getPlayers();
             for (Player player : players) {
                 PlayerEntity entity = (PlayerEntity) player.getEntity();

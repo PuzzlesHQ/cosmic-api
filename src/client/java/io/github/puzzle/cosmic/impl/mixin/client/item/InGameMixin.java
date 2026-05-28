@@ -45,7 +45,7 @@ public class InGameMixin {
                     }
                     boolean isLeftClick = ControlSettings.keyAttackBreak.isPressed();
 
-                    if (GameSingletons.isHost){
+                    if (GameSingletons.isHost()){
                         item.use(
                                 APISide.SINGLE_PLAYER_CLIENT,
                                 UI.hotbar.getSelectedSlot(),

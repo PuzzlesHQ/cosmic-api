@@ -1,8 +1,8 @@
 package io.github.puzzle.cosmic.impl.world.zone;
 
 import com.badlogic.gdx.utils.Array;
-import finalforeach.cosmicreach.entities.Entity;
-import finalforeach.cosmicreach.entities.EntityUniqueId;
+import finalforeach.cosmicreach.entities.GameEntity;
+import finalforeach.cosmicreach.entities.GameEntityUniqueId;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.world.IZone;
 
@@ -17,42 +17,42 @@ public class ZoneEntityManager implements IZone.IEntityManager {
     }
 
     @Override
-    public void addEntity(Entity entity) {
+    public void addEntity(GameEntity entity) {
         puzzleLoader$zone.addEntity(entity);
     }
 
     @Override
-    public Entity getEntity(EntityUniqueId entityUniqueId) {
+    public GameEntity getEntity(GameEntityUniqueId entityUniqueId) {
         return puzzleLoader$zone.getEntity(entityUniqueId);
     }
 
     @Override
-    public boolean hasEntity(Entity entity) {
+    public boolean hasEntity(GameEntity entity) {
         return puzzleLoader$zone.hasEntity(entity);
     }
 
     @Override
-    public void removeEntity(EntityUniqueId entityUniqueId) {
+    public void removeEntity(GameEntityUniqueId entityUniqueId) {
         puzzleLoader$zone.removeEntity(entityUniqueId);
     }
 
     @Override
-    public void removeEntity(Entity entity) {
+    public void removeEntity(GameEntity entity) {
         puzzleLoader$zone.removeEntity(entity);
     }
 
     @Override
-    public void despawnEntity(Entity entity) {
+    public void despawnEntity(GameEntity entity) {
         puzzleLoader$zone.despawnEntity(entity);
     }
 
     @Override
-    public void forEachEntity(Consumer<Entity> consumer) {
+    public void forEachEntity(Consumer<GameEntity> consumer) {
         puzzleLoader$zone.forEachEntity(consumer);
     }
 
     @Override
-    public Array<Entity> getAllEntities() {
+    public Array<GameEntity> getAllEntities() {
         return puzzleLoader$zone.getAllEntities();
     }
 
