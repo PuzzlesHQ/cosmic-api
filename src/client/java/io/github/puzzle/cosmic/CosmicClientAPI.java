@@ -22,7 +22,7 @@ public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
 
     @SubscribeEvent
     public void register(EventRegisterPacket event) {
-        event.registerReservedPacket("item-use", 9003, ItemUsePacket.class);
+        event.registerPacket("item-use", 9100, ItemUsePacket.class);
     }
 
     @Override
