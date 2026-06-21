@@ -1,4 +1,4 @@
-finalforeach/cosmicreach/entities/Entity                    <- io/github/puzzle/cosmic/api/entity/IEntity
+finalforeach/cosmicreach/entities/GameEntity                    <- io/github/puzzle/cosmic/api/entity/IEntity
 finalforeach/cosmicreach/entities/player/Player             <- io/github/puzzle/cosmic/api/entity/player/IPlayer
 finalforeach/cosmicreach/entities/player/PlayerEntity       <- io/github/puzzle/cosmic/api/entity/player/IPlayerEntity
 finalforeach/cosmicreach/blocks/blockentities/BlockEntity   <- io/github/puzzle/cosmic/api/block/IBlockEntity
