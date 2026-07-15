@@ -44,4 +44,9 @@ public interface IDataPoint<T> extends ICRBinSerializable {
      */
     Class<T> getClassType();
 
+    /**
+     * Makes a copy of the data-point.
+     */
+    IDataPoint<T> copy();
+
 }

@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Internal
 @Mixin(ItemStack.class)
@@ -24,7 +25,7 @@ public abstract class ItemStackMixin implements IItemStack {
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Inject(method = "read", at = @At("TAIL"), remap = false)
-    private void write(CRBinDeserializer crbd, CallbackInfo ci) {
+    private void read(CRBinDeserializer crbd, CallbackInfo ci) {
         IDataPointManifest manifest = crbd.readObj("point_manifest", DataPointManifest.class);
         if (manifest != null) setPointManifest(manifest);
     }
@@ -32,6 +33,12 @@ public abstract class ItemStackMixin implements IItemStack {
     @Inject(method = "write", at = @At("TAIL"), remap = false)
     private void write(CRBinSerializer crbs, CallbackInfo ci) {
         crbs.writeObj("point_manifest", puzzleLoader$manifest);
+    }
+
+    @Inject(method = "copy", at = @At("RETURN"), remap = false)
+    private void copy(CallbackInfoReturnable<ItemStack> cir) {
+        IItemStack mixin = cir.getReturnValue();
+        mixin.setPointManifest(puzzleLoader$manifest.copy());
     }
 
     @Override

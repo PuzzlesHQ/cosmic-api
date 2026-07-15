@@ -66,4 +66,8 @@ public interface IDataPointManifest extends ICRBinSerializable {
      */
     void remove(String name);
 
+    /**
+     * Makes a deep copy of the point manifest.
+     */
+    IDataPointManifest copy();
 }

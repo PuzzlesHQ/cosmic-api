@@ -2,6 +2,7 @@ package io.github.puzzle.cosmic.impl.data.point.array;
 
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
 public class BooleanArrayDataPoint extends AbstractDataPoint<boolean[]> {
@@ -22,5 +23,12 @@ public class BooleanArrayDataPoint extends AbstractDataPoint<boolean[]> {
     @Override
     public void write(CRBinSerializer serializer) {
         serializer.writeBooleanArray("v", value);
+    }
+
+    @Override
+    public IDataPoint<boolean[]> copy() {
+        boolean[] clone = new boolean[getValue().length];
+        System.arraycopy(value, 0, clone, 0, value.length);
+        return new BooleanArrayDataPoint(clone);
     }
 }

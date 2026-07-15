@@ -52,4 +52,9 @@ public class TaggedDataPoint<V> implements ITaggedDataPoint<V> {
     public Class<V> getClassType() {
         return point.getClassType();
     }
+
+    @Override
+    public IDataPoint<V> copy() {
+        return new TaggedDataPoint<>(name, point.copy());
+    }
 }

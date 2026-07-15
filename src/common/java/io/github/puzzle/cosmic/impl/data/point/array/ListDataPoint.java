@@ -6,9 +6,11 @@ import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.data.point.DataPointCastingException;
 import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
+import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -76,5 +78,20 @@ public class ListDataPoint<T extends ICRBinSerializable> extends AbstractDataPoi
     @Override
     public @NotNull Iterator<T> iterator() {
         return value.iterator();
+    }
+
+    @Override
+    public IDataPoint<List<T>> copy() {
+        List<T> copy = new ArrayList<>();
+        for (int i = 0; i < value.size(); i++) {
+            DataPointManifest.serial.writeObj("obj_" + i, value.get(i));
+        }
+        ByteBuffer buf = ByteBuffer.wrap(DataPointManifest.serial.toBytes());
+        DataPointManifest.serial.reset();
+        DataPointManifest.deserial.prepareForRead(buf);
+        for (int i = 0; i < value.size(); i++) {
+            copy.add((T) DataPointManifest.deserial.readObj("obj_" + i, value.get(i).getClass()));
+        }
+        return new ListDataPoint<>(copy);
     }
 }

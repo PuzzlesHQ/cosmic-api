@@ -13,6 +13,9 @@ import java.util.Map;
 
 public class DataPointManifest implements IDataPointManifest, ICRBinSerializable {
 
+    public static CRBinSerializer serial = new CRBinSerializer();
+    public static CRBinDeserializer deserial = new CRBinDeserializer();
+
     Map<String, IDataPoint<?>> dataPointMap = new HashMap<>();
 
     @Override
@@ -60,6 +63,18 @@ public class DataPointManifest implements IDataPointManifest, ICRBinSerializable
     @Override
     public void remove(String s) {
         dataPointMap.remove(s);
+    }
+
+    @Override
+    public IDataPointManifest copy() {
+        DataPointManifest dataPointManifest = new DataPointManifest();
+        for (Map.Entry<String, IDataPoint<?>> stringIDataPointEntry : dataPointMap.entrySet()) {
+            dataPointManifest.put(
+                    stringIDataPointEntry.getKey(),
+                    stringIDataPointEntry.getValue().copy()
+            );
+        }
+        return dataPointManifest;
     }
 
     @Override

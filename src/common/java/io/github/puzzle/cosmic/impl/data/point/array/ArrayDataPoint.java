@@ -3,11 +3,16 @@ package io.github.puzzle.cosmic.impl.data.point.array;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
+import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ArrayDataPoint<T extends ICRBinSerializable> extends AbstractDataPoint<T[]> implements Iterable<T> {
 
@@ -81,5 +86,20 @@ public class ArrayDataPoint<T extends ICRBinSerializable> extends AbstractDataPo
         public T next() {
             return value[index++];
         }
+    }
+
+    @Override
+    public IDataPoint<T[]> copy() {
+        ICRBinSerializable[] copy = new ICRBinSerializable[value.length];
+        for (int i = 0; i < value.length; i++) {
+            DataPointManifest.serial.writeObj("obj_" + i, value[i]);
+        }
+        ByteBuffer buf = ByteBuffer.wrap(DataPointManifest.serial.toBytes());
+        DataPointManifest.serial.reset();
+        DataPointManifest.deserial.prepareForRead(buf);
+        for (int i = 0; i < value.length; i++) {
+            copy[i] = DataPointManifest.deserial.readObj("obj_" + i, value[i].getClass());
+        }
+        return new ArrayDataPoint<>((T[])copy);
     }
 }

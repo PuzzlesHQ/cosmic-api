@@ -3,7 +3,11 @@ package io.github.puzzle.cosmic.impl.data.point;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
+import io.github.puzzle.cosmic.impl.data.point.array.ArrayDataPoint;
+
+import java.nio.ByteBuffer;
 
 public class TaggedObjectDataPoint extends AbstractDataPoint<ICRBinSerializable> implements ITaggedDataPoint<ICRBinSerializable> {
 
@@ -47,4 +51,13 @@ public class TaggedObjectDataPoint extends AbstractDataPoint<ICRBinSerializable>
         serializer.writeObj("tag-value", value);
     }
 
+    @Override
+    public IDataPoint<ICRBinSerializable> copy() {
+        DataPointManifest.serial.writeObj("obj", value);
+
+        ByteBuffer buf = ByteBuffer.wrap(DataPointManifest.serial.toBytes());
+        DataPointManifest.serial.reset();
+        DataPointManifest.deserial.prepareForRead(buf);
+        return new TaggedObjectDataPoint(name, DataPointManifest.deserial.readObj("obj", value.getClass()));
+    }
 }

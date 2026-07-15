@@ -3,6 +3,7 @@ package io.github.puzzle.cosmic.impl.data.point.array;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.SchemaType;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
 public class ShortObjectArrayDataPoint extends AbstractDataPoint<Short[]> {
@@ -28,5 +29,12 @@ public class ShortObjectArrayDataPoint extends AbstractDataPoint<Short[]> {
         serializer.writeArray("v", SchemaType.SHORT_ARRAY, value.length, (i) -> {
             serializer.writeShort(null, value[i]);
         });
+    }
+
+    @Override
+    public IDataPoint<Short[]> copy() {
+        Short[] clone = new Short[getValue().length];
+        System.arraycopy(value, 0, clone, 0, value.length);
+        return new ShortObjectArrayDataPoint(clone);
     }
 }
