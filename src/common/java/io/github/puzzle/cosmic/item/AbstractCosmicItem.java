@@ -39,7 +39,7 @@ public class AbstractCosmicItem implements IGameTagged, Item, IItem {
 
     @Override
     public GameTagList getTags() {
-        return new GameTagList();
+        return list;
     }
 
     @Override
