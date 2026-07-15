@@ -17,12 +17,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 public class CosmicClientAPI implements ClientPostModInit, ClientModInit {
 
     public CosmicClientAPI() {
-        GameRegistries.NETWORK_EVENT_BUS.register(this);
-    }
-
-    @SubscribeEvent
-    public void register(EventRegisterPacket event) {
-        event.registerPacket("item-use", 9100, ItemUsePacket.class);
     }
 
     @Override
