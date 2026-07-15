@@ -2,10 +2,15 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 
 import com.llamalad7.mixinextras.lib.apache.commons.tuple.ImmutablePair;
 import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
+import finalforeach.cosmicreach.items.containers.SlotContainer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
+import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
+
+import java.nio.ByteBuffer;
 
 public class PairDataPoint<A extends ICRBinSerializable, B extends ICRBinSerializable> extends AbstractDataPoint<Pair<A, B>> {
 
@@ -79,5 +84,15 @@ public class PairDataPoint<A extends ICRBinSerializable, B extends ICRBinSeriali
     @Override
     public Class<Pair<A, B>> getClassType() {
         return (Class<Pair<A, B>>) value.getClass();
+    }
+
+    @Override
+    public IDataPoint<Pair<A, B>> copy() {
+        DataPointManifest.serial.writeObj("obj", this);
+
+        ByteBuffer buf = ByteBuffer.wrap(DataPointManifest.serial.toBytes());
+        DataPointManifest.serial.reset();
+        DataPointManifest.deserial.prepareForRead(buf);
+        return DataPointManifest.deserial.readObj("obj", PairDataPoint.class);
     }
 }

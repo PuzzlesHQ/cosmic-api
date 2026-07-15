@@ -3,6 +3,7 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
@@ -23,6 +24,11 @@ public class PuzzleIdentifierDataPoint extends AbstractDataPoint<Identifier> {
 
     @Override
     public void write(CRBinSerializer serializer) {
-        serializer.writeString("v", ((IIdentifier)value).asString());
+        serializer.writeString("v", value.asString());
+    }
+
+    @Override
+    public IDataPoint<Identifier> copy() {
+        return new PuzzleIdentifierDataPoint(Identifier.of(value.toString()));
     }
 }

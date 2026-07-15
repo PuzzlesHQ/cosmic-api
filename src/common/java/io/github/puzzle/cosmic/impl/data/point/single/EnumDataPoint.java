@@ -2,6 +2,7 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,5 +45,10 @@ public class EnumDataPoint<T extends Enum> extends AbstractDataPoint<T> {
     public void write(CRBinSerializer serializer) {
         serializer.writeString("type", value.getClass().getName());
         serializer.writeInt("v", value.ordinal());
+    }
+
+    @Override
+    public IDataPoint<T> copy() {
+        return new EnumDataPoint<>(value);
     }
 }

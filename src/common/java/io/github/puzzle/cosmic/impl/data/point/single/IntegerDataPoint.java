@@ -28,4 +28,9 @@ public class IntegerDataPoint extends AbstractDataPoint<Integer> {
     public boolean isOfType(Class<?> typeClass) {
         return Integer.class.isAssignableFrom(typeClass) || int.class.isAssignableFrom(typeClass);
     }
+
+    @Override
+    public IntegerDataPoint copy() {
+        return new IntegerDataPoint(getValue());
+    }
 }

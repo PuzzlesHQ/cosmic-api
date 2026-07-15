@@ -2,8 +2,11 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
+
+import java.nio.ByteBuffer;
 
 public class ManifestDataPoint extends AbstractDataPoint<DataPointManifest> {
 
@@ -23,5 +26,10 @@ public class ManifestDataPoint extends AbstractDataPoint<DataPointManifest> {
     @Override
     public void write(CRBinSerializer serializer) {
         serializer.writeObj("v", value);
+    }
+
+    @Override
+    public ManifestDataPoint copy() {
+        return new ManifestDataPoint((DataPointManifest) value.copy());
     }
 }

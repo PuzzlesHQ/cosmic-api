@@ -3,6 +3,7 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 import com.badlogic.gdx.math.Vector2;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
 public class Vector2DataPoint extends AbstractDataPoint<Vector2> {
@@ -27,5 +28,10 @@ public class Vector2DataPoint extends AbstractDataPoint<Vector2> {
     public void write(CRBinSerializer serializer) {
         serializer.writeFloat("x", value.x);
         serializer.writeFloat("y", value.y);
+    }
+
+    @Override
+    public IDataPoint<Vector2> copy() {
+        return new Vector2DataPoint(value.cpy());
     }
 }

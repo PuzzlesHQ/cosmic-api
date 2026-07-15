@@ -2,6 +2,7 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
 import java.lang.reflect.Field;
@@ -33,5 +34,10 @@ public class DoubleDataPoint extends AbstractDataPoint<Double> {
     @Override
     public boolean isOfType(Class<?> typeClass) {
         return Double.class.isAssignableFrom(typeClass) || double.class.isAssignableFrom(typeClass);
+    }
+
+    @Override
+    public IDataPoint<Double> copy() {
+        return new DoubleDataPoint(value);
     }
 }

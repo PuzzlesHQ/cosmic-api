@@ -28,4 +28,9 @@ public class LongDataPoint extends AbstractDataPoint<Long> {
     public boolean isOfType(Class<?> typeClass) {
         return Long.class.isAssignableFrom(typeClass) || long.class.isAssignableFrom(typeClass);
     }
+
+    @Override
+    public LongDataPoint copy() {
+        return new LongDataPoint(getValue());
+    }
 }

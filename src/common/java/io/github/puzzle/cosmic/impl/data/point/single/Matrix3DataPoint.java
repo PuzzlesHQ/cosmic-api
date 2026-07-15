@@ -3,6 +3,7 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 import com.badlogic.gdx.math.Matrix3;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
 public class Matrix3DataPoint extends AbstractDataPoint<Matrix3> {
@@ -25,5 +26,10 @@ public class Matrix3DataPoint extends AbstractDataPoint<Matrix3> {
     @Override
     public void write(CRBinSerializer serializer) {
         serializer.writeFloatArray("v", value.val);
+    }
+
+    @Override
+    public IDataPoint<Matrix3> copy() {
+        return new Matrix3DataPoint(new Matrix3(getValue()));
     }
 }
