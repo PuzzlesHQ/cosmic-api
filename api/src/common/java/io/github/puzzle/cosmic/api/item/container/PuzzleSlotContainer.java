@@ -17,15 +17,6 @@ import java.util.List;
 public interface PuzzleSlotContainer {
 
     /**
-     * Drops all the items in the slotContainer.
-     * @param zone the zone the item will be drop in.
-     * @param position the position where the items will be dropped.
-     */
-    default void dropAllItems(Zone zone, Vector3 position) {
-        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
-    }
-
-    /**
      * Gets the first full itemSlot.
      *
      * @return a {@link ItemSlot}

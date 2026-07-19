@@ -19,17 +19,10 @@ import java.util.function.Consumer;
 @Mixin(SlotContainer.class)
 public abstract class SlotContainerMixin implements PuzzleSlotContainer {
 
-    @Shadow public abstract void dropAllItems(Zone zone, float x, float y, float z);
-
     @Shadow public abstract void forEachSlot(Consumer<ItemSlot> slotConsumer);
 
     @Unique
     SlotContainer puzzleLoader$container = (SlotContainer)(Object)this;
-
-    @Override
-    public void dropAllItems(Zone zone, Vector3 position) {
-        this.dropAllItems(zone,position.x,position.y,position.z);
-    }
 
     @Override
     public ItemSlot getFirstFullItemSlot() {

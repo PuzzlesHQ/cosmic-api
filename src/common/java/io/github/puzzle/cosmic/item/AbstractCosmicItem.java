@@ -108,7 +108,7 @@ public class AbstractCosmicItem implements IGameTagged, Item, IItem {
 
     @Override
     public boolean hasIntProperty(String s) {
-        return manifest.has(s);
+        return manifest.has(s) && manifest.get(s).isOfType(Integer.class);
     }
 
     @Override
