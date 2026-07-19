@@ -61,10 +61,5 @@ public abstract class SlotContainerMixin implements PuzzleSlotContainer {
         return itemSlotList;
     }
 
-    @Override
-    public void clear() {
-        this.forEachSlot((p) -> p.setItemStack(null));
-    }
-
 
 }

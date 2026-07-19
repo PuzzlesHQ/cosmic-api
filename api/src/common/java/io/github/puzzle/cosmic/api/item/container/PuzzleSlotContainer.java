@@ -52,11 +52,4 @@ public interface PuzzleSlotContainer {
         throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
     }
 
-    /**
-     * Clears all itemSlots by removing their itemStack.
-     */
-    default void clear() {
-        throw new UnsupportedOperationException("Contact this mod-developer if this error ever appears.");
-    }
-
 }
