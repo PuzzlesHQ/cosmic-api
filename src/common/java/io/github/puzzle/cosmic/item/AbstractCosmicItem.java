@@ -121,7 +121,7 @@ public class AbstractCosmicItem implements IGameTagged, Item, IItem {
 
     @Override
     public boolean hasFloatProperty(String s) {
-        return manifest.has(s);
+        return manifest.has(s) && manifest.get(s).isOfType(Float.class);
     }
 
     @Override
