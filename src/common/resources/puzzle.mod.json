@@ -31,7 +31,11 @@
     "server": true
   },
   "mixins": [
-    "puzzle_cosmic_api.mixins.json"
+    "puzzle_cosmic_api.mixins.json",
+    {
+      "config": "puzzle_cosmic_api.client.mixins.json",
+      "environment": "client"
+    }
   ],
   "interface-injectors": [
     "cosmic-api-injector.inject"

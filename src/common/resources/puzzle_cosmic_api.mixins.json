@@ -6,13 +6,6 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "client": [
-    "client.item.ClientBlockEventsMixin",
-    "client.item.InGameMixin",
-    "client.item.ItemRegisterMixin",
-    "client.item.ItemSlotWidgetMixin",
-    "client.entity.EntityMixin"
-  ],
   "mixins": [
     "account.AccountMixin",
     "block.BlockEntityMixin",

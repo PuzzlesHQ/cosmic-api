@@ -15,8 +15,8 @@ import io.netty.channel.ChannelHandlerContext;
 public class ItemUsePacket extends GamePacket {
 
     int slotId;
-    BlockPosition targetPlaceBlockPos;
-    BlockPosition targetBreakBlockPos;
+    BlockPosition targetPlaceBlockPos = null;
+    BlockPosition targetBreakBlockPos = null;
     boolean usedLeftClick;
 
     public ItemUsePacket() {}
@@ -32,7 +32,6 @@ public class ItemUsePacket extends GamePacket {
     public void receive(ByteBuf in) {
         this.slotId = this.readInt(in);
         int lossIdx = this.readByte(in);
-        System.out.println(lossIdx);
         if ((lossIdx & 1) == 0) this.targetPlaceBlockPos = this.readBlockPosition(in, GameSingletons.world.getZoneIfExists(this.readString(in)));
         if ((lossIdx & 2) == 0) this.targetBreakBlockPos = this.readBlockPosition(in, GameSingletons.world.getZoneIfExists(this.readString(in)));
         this.usedLeftClick = this.readBoolean(in);
@@ -65,7 +64,6 @@ public class ItemUsePacket extends GamePacket {
         ItemSlot slot = player.inventory.getSlot(slotId);
         ItemStack stack = slot != null ? slot.getItemStack() : null;
 
-        System.out.println(slotId + " " + slot);
         if (stack != null) {
             stack.getItem().use(APISide.SERVER, slot, player, targetPlaceBlockPos, targetBreakBlockPos, usedLeftClick);
         }

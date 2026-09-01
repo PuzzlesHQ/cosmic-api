@@ -9,6 +9,8 @@ import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.util.APISide;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 
+import javax.annotation.Nullable;
+
 /**
  *
  * @author Mr_Zombii
@@ -32,7 +34,7 @@ public interface IItem {
      * @param isLeftClick is left click used.
      * @return {@code true} if successful.
      */
-    default boolean use(APISide side, ItemSlot itemSlot, Player player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
+    default boolean use(APISide side, ItemSlot itemSlot, Player player, @Nullable BlockPosition targetPlaceBlockPos, @Nullable BlockPosition targetBreakBlockPos, boolean isLeftClick) {
         return false;
     }
 

@@ -35,11 +35,16 @@ public class InGameMixin {
             ItemStack stack = UI.hotbar.getSelectedSlot().getItemStack();
             if (stack != null && stack.getItem() instanceof IItem item) {
                 if ((ControlSettings.keyUsePlace.isPressed() && !isPressed) || (ControlSettings.keyAttackBreak.isPressed() && !isPressed)) {
-                    BlockPosition targetPlaceBlockPos = null;
-                    BlockPosition targetBreakBlockPos = null;
+                    BlockPosition targetPlaceBlockPos;
+                    BlockPosition targetBreakBlockPos;
                     try {
-                        targetPlaceBlockPos = ((BlockRaycasts) ReflectionUtil.getField(blockSelection, "blockRaycasts").get(blockSelection)).getPlacingBlockPos();
-                        targetBreakBlockPos = ((BlockRaycasts) ReflectionUtil.getField(blockSelection, "blockRaycasts").get(blockSelection)).getBreakingBlockPos();
+                        BlockRaycasts rayCasts = ((BlockRaycasts) ReflectionUtil.getField(blockSelection, "blockRaycasts").get(blockSelection));
+                        targetPlaceBlockPos = rayCasts.getPlacingBlockPos();
+                        targetBreakBlockPos = rayCasts.getBreakingBlockPos();
+
+                        if (targetPlaceBlockPos != null && targetPlaceBlockPos.chunk == null) targetPlaceBlockPos = null;
+                        if (targetBreakBlockPos != null && targetBreakBlockPos.chunk == null) targetBreakBlockPos = null;
+
                     } catch (IllegalAccessException | NoSuchFieldException e) {
                         throw new RuntimeException(e);
                     }
